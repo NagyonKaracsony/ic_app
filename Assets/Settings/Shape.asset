@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0076625ee27174e8128330c51feb7e, type: 3}
+  m_Name: Shape
+  m_EditorClassIdentifier: 
+  planetRadius: 10
+  noiseLayers:
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 0.03
+        numLayers: 3
+        baseRoughness: 0.6
+        roughness: 5
+        persistence: 0.25
+        center:
+        - 2.46
+        - 0.49
+        - -0.93
+        minValue: 0.75
+      rigidNoiseSettings:
+        strength: 0
+        numLayers: 0
+        baseRoughness: 0
+        roughness: 0
+        persistence: 0
+        center:
+        - 0
+        - 0
+        - 0
+        minValue: 0
+        weightMultiplier: 0
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 0
+      simpleNoiseSettings:
+        strength: 1
+        numLayers: 5
+        baseRoughness: 1
+        roughness: 3.5
+        persistence: 0.75
+        center:
+        - 0
+        - 0
+        - 0
+        minValue: 3
+      rigidNoiseSettings:
+        strength: 0
+        numLayers: 0
+        baseRoughness: 0
+        roughness: 0
+        persistence: 0
+        center:
+        - 0
+        - 0
+        - 0
+        minValue: 0
+        weightMultiplier: 0
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      filterType: 1
+      simpleNoiseSettings:
+        strength: 0
+        numLayers: 0
+        baseRoughness: 0
+        roughness: 0
+        persistence: 0
+        center:
+        - 0
+        - 0
+        - 0
+        minValue: 0
+      rigidNoiseSettings:
+        strength: 1
+        numLayers: 4
+        baseRoughness: 1
+        roughness: 3
+        persistence: 1.5
+        center:
+        - -0.38
+        - 0.01
+        - 0
+        minValue: 0
+        weightMultiplier: 0.3
