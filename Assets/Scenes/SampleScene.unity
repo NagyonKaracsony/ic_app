@@ -469,14 +469,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e91b294f82ab54386b3d26dca450ab, type: 3}
+  m_Script: {fileID: 11500000, guid: ef700fa71b1bf6e4c98edcec25b3c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   FocusPoint: {x: 0, y: 0, z: 0}
-  DistanceFromFocus: 10
-  OrbitSpeed: 50
+  DistanceFromFocus: 40
+  OrbitSpeed: 90
   ZoomSpeed: 2
-  CameraMoveSpeed: 5
+  CameraMoveSpeed: 2
 --- !u!1 &1537526465
 GameObject:
   m_ObjectHideFlags: 0
