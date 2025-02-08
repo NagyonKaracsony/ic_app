@@ -1,0 +1,433 @@
+{
+  "resolution": 64,
+  "shapeSettings": {
+    "planetRadius": 0.10000000149011612,
+    "noiseLayers": [
+      {
+        "enabled": true,
+        "useFirstLayerAsMask": false,
+        "noiseSettings": {
+          "filterType": 0,
+          "simpleNoiseSettings": {
+            "strength": 0.05000000074505806,
+            "numLayers": 8,
+            "baseRoughness": 0.60000002384185791,
+            "roughness": 5.0,
+            "persistence": 0.25,
+            "center": [ 0.0, 0.0, 0.0 ],
+            "minValue": 0.75
+          },
+          "rigidNoiseSettings": {
+            "strength": 0.0,
+            "numLayers": 0,
+            "baseRoughness": 0.0,
+            "roughness": 0.0,
+            "persistence": 0.0,
+            "center": [ 0.0, 0.0, 0.0 ],
+            "minValue": 0.0,
+            "weightMultiplier": 0.0
+          }
+        }
+      },
+      {
+        "enabled": true,
+        "useFirstLayerAsMask": true,
+        "noiseSettings": {
+          "filterType": 0,
+          "simpleNoiseSettings": {
+            "strength": 1.0,
+            "numLayers": 5,
+            "baseRoughness": 1.0,
+            "roughness": 3.5,
+            "persistence": 0.75,
+            "center": [ 0.0, 0.0, 0.0 ],
+            "minValue": 3.0
+          },
+          "rigidNoiseSettings": {
+            "strength": 0.0,
+            "numLayers": 0,
+            "baseRoughness": 0.0,
+            "roughness": 0.0,
+            "persistence": 0.0,
+            "center": [ 0.0, 0.0, 0.0 ],
+            "minValue": 0.0,
+            "weightMultiplier": 0.0
+          }
+        }
+      },
+      {
+        "enabled": true,
+        "useFirstLayerAsMask": true,
+        "noiseSettings": {
+          "filterType": 1,
+          "simpleNoiseSettings": {
+            "strength": 0.0,
+            "numLayers": 0,
+            "baseRoughness": 0.0,
+            "roughness": 0.0,
+            "persistence": 0.0,
+            "center": [ 0.0, 0.0, 0.0 ],
+            "minValue": 0.0
+          },
+          "rigidNoiseSettings": {
+            "strength": 1.0,
+            "numLayers": 2,
+            "baseRoughness": 1.0,
+            "roughness": 3.0,
+            "persistence": 1.5,
+            "center": [ -0.37999999523162842, 0.0099999997764825821, 0.0 ],
+            "minValue": 0.0,
+            "weightMultiplier": 0.30000001192092896
+          }
+        }
+      }
+    ]
+  },
+  "colorSettings": {
+    "planetMaterial": { "instanceID": 0 },
+    "biomeColorSettings": {
+      "biomes": [
+        {
+          "gradient": {
+            "serializedVersion": "2",
+            "key0": {
+              "r": 0.47080737352371216,
+              "g": 0.39994484186172485,
+              "b": 0.062494736164808273,
+              "a": 1.0
+            },
+            "key1": {
+              "r": 0.2409304678440094,
+              "g": 0.57735848426818848,
+              "b": 0.18192236125469208,
+              "a": 1.0
+            },
+            "key2": {
+              "r": 0.43508210778236389,
+              "g": 0.42751675844192505,
+              "b": 0.081055030226707458,
+              "a": 0.0
+            },
+            "key3": {
+              "r": 0.43508210778236389,
+              "g": 0.42751675844192505,
+              "b": 0.081055030226707458,
+              "a": 0.0
+            },
+            "key4": {
+              "r": 0.43508210778236389,
+              "g": 0.42751675844192505,
+              "b": 0.081055030226707458,
+              "a": 0.0
+            },
+            "key5": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "key6": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "key7": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "ctime0": 540,
+            "ctime1": 17810,
+            "ctime2": 45875,
+            "ctime3": 34310,
+            "ctime4": 34310,
+            "ctime5": 0,
+            "ctime6": 0,
+            "ctime7": 0,
+            "atime0": 0,
+            "atime1": 65535,
+            "atime2": 0,
+            "atime3": 0,
+            "atime4": 0,
+            "atime5": 0,
+            "atime6": 0,
+            "atime7": 0,
+            "m_Mode": 0,
+            "m_ColorSpace": 0,
+            "m_NumColorKeys": 3,
+            "m_NumAlphaKeys": 2
+          },
+          "tint": {
+            "r": 0.042452845722436905,
+            "g": 0.4716981053352356,
+            "b": 0.0,
+            "a": 0.0
+          },
+          "startHeight": 0.0,
+          "tintPercent": 0.0
+        },
+        {
+          "gradient": {
+            "serializedVersion": "2",
+            "key0": {
+              "r": 0.48679238557815552,
+              "g": 0.38760796189308167,
+              "b": 0.054190058261156082,
+              "a": 1.0
+            },
+            "key1": {
+              "r": 0.12173010408878326,
+              "g": 0.46415090560913086,
+              "b": 0.14121638238430023,
+              "a": 1.0
+            },
+            "key2": {
+              "r": 0.44905650615692139,
+              "g": 0.22706307470798492,
+              "b": 0.016098188236355782,
+              "a": 0.0
+            },
+            "key3": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key4": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key5": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key6": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "key7": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "ctime0": 655,
+            "ctime1": 3277,
+            "ctime2": 38319,
+            "ctime3": 65535,
+            "ctime4": 65535,
+            "ctime5": 65535,
+            "ctime6": 0,
+            "ctime7": 0,
+            "atime0": 0,
+            "atime1": 65535,
+            "atime2": 0,
+            "atime3": 0,
+            "atime4": 0,
+            "atime5": 0,
+            "atime6": 0,
+            "atime7": 0,
+            "m_Mode": 0,
+            "m_ColorSpace": 0,
+            "m_NumColorKeys": 4,
+            "m_NumAlphaKeys": 2
+          },
+          "tint": {
+            "r": 1.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+          },
+          "startHeight": 0.699999988079071,
+          "tintPercent": 0.0
+        },
+        {
+          "gradient": {
+            "serializedVersion": "2",
+            "key0": {
+              "r": 0.24809540808200836,
+              "g": 0.30385544896125793,
+              "b": 0.43396228551864624,
+              "a": 1.0
+            },
+            "key1": {
+              "r": 0.4983195960521698,
+              "g": 0.58025240898132324,
+              "b": 0.67547160387039185,
+              "a": 1.0
+            },
+            "key2": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key3": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key4": {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 0.0
+            },
+            "key5": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "key6": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "key7": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 0.0
+            },
+            "ctime0": 0,
+            "ctime1": 655,
+            "ctime2": 65535,
+            "ctime3": 65535,
+            "ctime4": 65535,
+            "ctime5": 0,
+            "ctime6": 0,
+            "ctime7": 0,
+            "atime0": 0,
+            "atime1": 65535,
+            "atime2": 0,
+            "atime3": 0,
+            "atime4": 0,
+            "atime5": 0,
+            "atime6": 0,
+            "atime7": 0,
+            "m_Mode": 0,
+            "m_ColorSpace": 0,
+            "m_NumColorKeys": 3,
+            "m_NumAlphaKeys": 2
+          },
+          "tint": {
+            "r": 0.0,
+            "g": 0.22631965577602386,
+            "b": 0.97647058963775635,
+            "a": 0.0
+          },
+          "startHeight": 0.949999988079071,
+          "tintPercent": 0.0
+        }
+      ],
+      "noise": {
+        "filterType": 0,
+        "simpleNoiseSettings": {
+          "strength": 0.5,
+          "numLayers": 8,
+          "baseRoughness": 2.0,
+          "roughness": 2.0,
+          "persistence": 1.0,
+          "center": [ 4.78000020980835, -3.369999885559082, 0.0 ],
+          "minValue": 0.5
+        },
+        "rigidNoiseSettings": {
+          "strength": 1.0,
+          "numLayers": 5,
+          "baseRoughness": 1.0,
+          "roughness": 2.0,
+          "persistence": 0.5,
+          "center": [ 0.0, 0.0, 0.0 ],
+          "minValue": 0.0,
+          "weightMultiplier": 0.800000011920929
+        }
+      },
+      "noiseOffset": 0.0,
+      "noiseStrenght": 0.25,
+      "blendAmount": 1.0
+    },
+    "oceanColor": {
+      "serializedVersion": "2",
+      "key0": {
+        "r": 0.10588233172893524,
+        "g": 0.2532481849193573,
+        "b": 0.53333336114883423,
+        "a": 1.0
+      },
+      "key1": {
+        "r": 0.078497655689716339,
+        "g": 0.48502758145332336,
+        "b": 0.6603773832321167,
+        "a": 1.0
+      },
+      "key2": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "key3": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "key4": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "key5": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "key6": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "key7": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+      },
+      "ctime0": 5937,
+      "ctime1": 56360,
+      "ctime2": 0,
+      "ctime3": 0,
+      "ctime4": 0,
+      "ctime5": 0,
+      "ctime6": 0,
+      "ctime7": 0,
+      "atime0": 65535,
+      "atime1": 65535,
+      "atime2": 0,
+      "atime3": 0,
+      "atime4": 0,
+      "atime5": 0,
+      "atime6": 0,
+      "atime7": 0,
+      "m_Mode": 0,
+      "m_ColorSpace": -1,
+      "m_NumColorKeys": 2,
+      "m_NumAlphaKeys": 2
+    }
+  },
+  "saveErrors": []
+}

@@ -57,7 +57,7 @@ public class Planet : MonoBehaviour
     {
         Initialize();
         GenerateMesh();
-        GenerateColours();
+        GenerateColors();
     }
     public void OnShapeSettingsUpdated()
     {
@@ -72,7 +72,7 @@ public class Planet : MonoBehaviour
         if (autoUpdate)
         {
             Initialize();
-            GenerateColours();
+            GenerateColors();
         }
     }
     void GenerateMesh()
@@ -80,105 +80,72 @@ public class Planet : MonoBehaviour
         for (int i = 0; i < 6; i++) if (meshFilters[i].gameObject.activeSelf) terrainFaces[i].ConstructMesh();
         colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
-    void GenerateColours()
+    void GenerateColors()
     {
         colorGenerator.UpdateColors();
         for (int i = 0; i < 6; i++) if (meshFilters[i].gameObject.activeSelf) terrainFaces[i].UpdateUVs(colorGenerator);
     }
     public void SaveTo(string filePath)
     {
-        System.IO.File.WriteAllText(filePath, "");
         PlanetData planetData = new(this);
         JObject json = JObject.Parse(JsonUtility.ToJson(planetData, true));
-        List<string> errorList = new();
         foreach (var property in json.Properties())
         {
             if (property.Value.Type == JTokenType.String && property.Value.ToString().Trim().StartsWith("{"))
             {
-                try
-                {
-                    JObject nestedObject = JObject.Parse(property.Value.ToString());
-                    property.Value = nestedObject;
-                }
-                catch (JsonReaderException error) { errorList.Add($"{error.StackTrace}\n{error.Message}"); }
+                JObject nestedObject = JObject.Parse(property.Value.ToString());
+                property.Value = nestedObject;
             }
         }
-        json.Add("saveErrors", JArray.FromObject(errorList));
-
+        System.IO.File.WriteAllText(filePath, "");
         System.IO.File.WriteAllText(filePath, json.ToString(Formatting.None));
     }
-
-    public static GameObject LoadFrom(string name, MaterialsHolder materialsHolder, string settingsTarget)
+    public static GameObject LoadFrom(string filePath, string name, MaterialsHolder materialsHolder)
     {
-        GameObject planet = new GameObject(name);
-
+        GameObject planet = new(name);
         Planet planetComponent = planet.AddComponent<Planet>();
         SphereCollider colliderComponent = planet.AddComponent<SphereCollider>();
 
-        planetComponent.resolution = 256;
-        planetComponent.shapeSettings = Instantiate(new ShapeSettings());
-        planetComponent.colorSettings = Instantiate(new ColorSettings());
-
-        planetComponent.colorSettings = ScriptableObject.CreateInstance<ColorSettings>();
+        planetComponent.resolution = 128;
         planetComponent.shapeSettings = ScriptableObject.CreateInstance<ShapeSettings>();
+        planetComponent.colorSettings = ScriptableObject.CreateInstance<ColorSettings>();
 
-        string savedData = System.IO.File.ReadAllText("C:\\Asztali gép\\test/test.json");
-        JObject jsonObject = JObject.Parse(savedData);
+        JObject jsonObject = JObject.Parse(System.IO.File.ReadAllText(filePath));
         jsonObject["colorSettings"]["planetMaterial"] = null;
 
-        planetComponent.shapeSettings = JsonConvert.DeserializeObject<ShapeSettings>(jsonObject["shapeSettings"]?.ToString());
-        planetComponent.colorSettings = JsonConvert.DeserializeObject<ColorSettings>(jsonObject["colorSettings"]?.ToString());
-
+        planetComponent.shapeSettings = JsonConvert.DeserializeObject<ShapeSettings>(jsonObject["shapeSettings"].ToString());
+        planetComponent.colorSettings = JsonConvert.DeserializeObject<ColorSettings>(jsonObject["colorSettings"].ToString());
         planetComponent.colorSettings.planetMaterial = new Material(materialsHolder.planetMaterial);
 
-        JObject oceanColorData = (JObject)jsonObject["colorSettings"]["oceanColor"];
+        planetComponent.colorSettings.oceanColor = DeserializeGradient((JObject)jsonObject["colorSettings"]["oceanColor"], 0.3f);
+        var landColorData = (JObject)jsonObject["colorSettings"]["biomeColorSettings"];
+        for (int i = 0; i < landColorData["biomes"].Count(); i++) planetComponent.colorSettings.biomeColorSettings.biomes[i].gradient = DeserializeGradient((JObject)landColorData["biomes"][i]["gradient"], 0.5f);
 
-        var oceanGradient = new Gradient();
-        var oceanColors = new GradientColorKey[oceanColorData["m_NumColorKeys"].Value<int>()];
-        var oceanAlphas = new GradientAlphaKey[oceanColorData["m_NumColorKeys"].Value<int>()];
-
-        for (int i = 0; i < oceanColorData["m_NumColorKeys"].Value<int>(); i++)
-        {
-            Color oceanColorBit = new(
-                oceanColorData[$"key{i}"]["r"].Value<float>() + Random.Range(-0.3f, 0.3f),
-                oceanColorData[$"key{i}"]["g"].Value<float>() + Random.Range(-0.3f, 0.3f),
-                oceanColorData[$"key{i}"]["b"].Value<float>() + Random.Range(-0.3f, 0.3f),
-                oceanColorData[$"key{i}"]["a"].Value<float>());
-            oceanColors[i] = new GradientColorKey(oceanColorBit, oceanColorData[$"ctime{i}"].Value<int>() / 65535f);
-            oceanAlphas[i] = new GradientAlphaKey(1.0f, 1.0f);
-        }
-        oceanGradient.SetKeys(oceanColors, oceanAlphas);
-        planetComponent.colorSettings.oceanColor = oceanGradient;
-
-        JObject landColorData = (JObject)jsonObject["colorSettings"]["biomeColorSettings"];
-        for (int i = 0; i < landColorData["biomes"].Count(); i++)
-        {
-            var biomeColorGradient = new Gradient();
-            JObject biome = (JObject)landColorData["biomes"][i]["gradient"];
-            var biomeColors = new GradientColorKey[biome["m_NumColorKeys"].Value<int>()];
-            var biomeAlphas = new GradientAlphaKey[biome["m_NumColorKeys"].Value<int>()];
-            for (int j = 0; j < biome["m_NumColorKeys"].Value<int>(); j++)
-            {
-                Color biomeColorBit = new(
-                    biome[$"key{j}"]["r"].Value<float>() + Random.Range(-0.5f, 0.5f),
-                    biome[$"key{j}"]["g"].Value<float>() + Random.Range(-0.5f, 0.5f),
-                    biome[$"key{j}"]["b"].Value<float>() + Random.Range(-0.5f, 0.5f),
-                    biome[$"key{j}"]["a"].Value<float>());
-                biomeColors[j] = new GradientColorKey(biomeColorBit, biome[$"ctime{j}"].Value<int>() / 65535f);
-                biomeAlphas[j] = new GradientAlphaKey(1.0f, 1.0f);
-            }
-            biomeColorGradient.SetKeys(biomeColors, biomeAlphas);
-            planetComponent.colorSettings.biomeColorSettings.biomes[i].gradient = biomeColorGradient;
-        }
         colliderComponent.radius = planetComponent.shapeSettings.planetRadius;
-
         planetComponent.GeneratePlanet();
         return planet;
     }
-    public void LogData()
+    private static Gradient DeserializeGradient(JObject gradientData, float randomRange)
     {
-        string planet = JsonUtility.ToJson(this, true);
-        string shapeSettings = JsonUtility.ToJson(this.shapeSettings, true);
-        string colorSettings = JsonUtility.ToJson(this.colorSettings, true);
+        int keyCount = gradientData["m_NumColorKeys"].Value<int>();
+        var colors = new GradientColorKey[keyCount];
+        var alphas = new GradientAlphaKey[keyCount];
+
+        for (int i = 0; i < keyCount; i++)
+        {
+            colors[i] = new GradientColorKey(
+                new Color(
+                    gradientData[$"key{i}"]["r"].Value<float>() + Random.Range(-randomRange, randomRange),
+                    gradientData[$"key{i}"]["g"].Value<float>() + Random.Range(-randomRange, randomRange),
+                    gradientData[$"key{i}"]["b"].Value<float>() + Random.Range(-randomRange, randomRange),
+                    gradientData[$"key{i}"]["a"].Value<float>()
+                ),
+                gradientData[$"ctime{i}"].Value<int>() / 65535f
+            );
+            alphas[i] = new GradientAlphaKey(1.0f, 1.0f);
+        }
+        var gradient = new Gradient();
+        gradient.SetKeys(colors, alphas);
+        return gradient;
     }
 }

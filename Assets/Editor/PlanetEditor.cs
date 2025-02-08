@@ -16,7 +16,7 @@ public class PlanetEditor : Editor
 
         if (GUILayout.Button("Generate Planet")) planet.GeneratePlanet();
         if (GUILayout.Button("Save Planet Settings")) planet.SaveTo($"C:\\Asztali gép\\test/{this.planet.saveTemplateAs}.json");
-        if (GUILayout.Button("Log Planet Settings")) planet.LogData();
+        // if (GUILayout.Button("Log Planet Settings")) planet.LogData();
 
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
         DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldout, ref colorEditor);
@@ -37,7 +37,6 @@ public class PlanetEditor : Editor
             }
         }
     }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>")]
     private void OnEnable()
     {
         planet = (Planet)target;
