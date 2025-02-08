@@ -1,25 +1,16 @@
 using UnityEngine;
+
 namespace Assets
 {
-    public class CameraController : MonoBehaviour
+    public class MainCameraController : MonoBehaviour, ICameraController
     {
-        [Header("Focus Settings")]
         public Vector3 FocusPoint;
-        public float DistanceFromFocus = 10f;
-        [Header("Camera Settings")]
-        public float OrbitSpeed = 30f;
-        public float ZoomSpeed = 2f;
-        public float CameraMoveSpeed = 2;
-        private float currentYRotation = 0f;
-        void Start()
-        {
-            if (FocusPoint == null) FocusPoint = new Vector3(0, 0, 0);
-        }
-        void Update()
-        {
-            HandleCameraMovement();
-        }
-        private void HandleCameraMovement()
+        public float DistanceFromFocus;
+        public static float OrbitSpeed = 30f;
+        public float CameraZoomSpeed;
+        public float CameraMoveSpeed;
+        public float currentYRotation = 0f;
+        public void HandleCameraMovement()
         {
             Vector3 forward = transform.forward;
             Vector3 right = transform.right;
@@ -40,7 +31,7 @@ namespace Assets
             if (Input.GetKey(KeyCode.Q)) currentYRotation += OrbitSpeed * Time.deltaTime;
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-            DistanceFromFocus -= scroll * (ZoomSpeed * DistanceFromFocus);
+            DistanceFromFocus -= scroll * (CameraZoomSpeed * DistanceFromFocus);
             DistanceFromFocus = Mathf.Clamp(DistanceFromFocus, 1f, 50f);
 
             Quaternion rotation = Quaternion.Euler(40f, currentYRotation, 0f);
