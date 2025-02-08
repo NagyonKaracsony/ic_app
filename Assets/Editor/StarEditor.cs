@@ -10,11 +10,11 @@ public class StarEditor : Editor
         using (var check = new EditorGUI.ChangeCheckScope())
         {
             base.OnInspectorGUI();
-            if (check.changed) star.GenerateStar();
+            // if (check.changed) star.GenerateStar();
         }
 
-        if (GUILayout.Button("Generate")) star.GenerateStar();
-        if (GUILayout.Button("Save")) star.Save();
+        // if (GUILayout.Button("Generate")) star.GenerateStar();
+        // if (GUILayout.Button("Save")) star.Save();
     }
     private void OnEnable()
     {

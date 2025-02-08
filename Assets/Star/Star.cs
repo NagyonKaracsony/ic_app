@@ -5,14 +5,16 @@ namespace Assets
     {
         public Material starMaterial;
         public StarSettings starSettings;
-        public void GenerateStar()
+        public void Start()
         {
-            MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
-            starMaterial = new(materialsHolder.starMaterial);
-        }
-        public void Save()
-        {
-            Debug.Log(starMaterial.ToString());
+            GameObject lightGameObject = new GameObject("StarLight");
+            Light lightComponent = lightGameObject.AddComponent<Light>();
+            lightComponent.type = LightType.Point;
+            lightComponent.color = Color.white;
+            lightComponent.intensity = 2;
+            lightComponent.range = 128;
+            lightGameObject.transform.position = transform.position;
+            lightGameObject.transform.SetParent(transform, false);
         }
     }
 }
