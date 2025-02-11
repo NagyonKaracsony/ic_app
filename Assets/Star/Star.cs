@@ -11,8 +11,8 @@ namespace Assets
             Light lightComponent = lightGameObject.AddComponent<Light>();
             lightComponent.type = LightType.Point;
             lightComponent.color = Color.white;
-            lightComponent.intensity = 2;
-            lightComponent.range = 128;
+            lightComponent.intensity = 1.75f;
+            lightComponent.range = 224;
             lightGameObject.transform.position = transform.position;
             lightGameObject.transform.SetParent(transform, false);
         }

@@ -1,7 +1,7 @@
 {
   "resolution": 64,
   "shapeSettings": {
-    "planetRadius": 0.10000000149011612,
+    "planetRadius": 1,
     "noiseLayers": [
       {
         "enabled": true,

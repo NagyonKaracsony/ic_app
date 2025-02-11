@@ -32,7 +32,7 @@ public class SystemSectors : MonoBehaviour
     {
         MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
 
-        GameObject hexagon = new GameObject($"Hexagon ({axialCoords.x}, {axialCoords.y})");
+        GameObject hexagon = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
         hexagon.transform.position = position;
         hexagon.transform.parent = transform;
 
@@ -42,9 +42,10 @@ public class SystemSectors : MonoBehaviour
         hexagon.transform.Rotate(new Vector3(180, 0, 0));
         if (Random.Range(1, 15) <= 1)
         {
-            GameObject planet = Planet.LoadFrom("C:\\Asztali gép\\test/test.json", $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
+            GameObject planet = Planet.LoadFrom("Assets\\Templates\\Planets\\GenerationTemplate.json", $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
             planet.transform.position = position;
         }
+
         meshFilter.mesh = GenerateHexagonMesh();
         meshRenderer.material = hexagonMaterial;
         meshCollider.sharedMesh = meshFilter.mesh;
