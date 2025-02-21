@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7300675c9b0b32498acca3a23c71e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarPrefab: {fileID: 3778706467885697537, guid: 43c3e0eae13b1654592229fe715dad49,
+  StarPrefab: {fileID: 638461837045462306, guid: 43c3e0eae13b1654592229fe715dad49,
     type: 3}
 --- !u!1 &878334265
 GameObject:
@@ -611,7 +611,7 @@ GameObject:
   - component: {fileID: 1577660000}
   - component: {fileID: 1577659999}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: BackgroundSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
