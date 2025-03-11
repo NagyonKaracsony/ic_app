@@ -1234,6 +1234,8 @@ MonoBehaviour:
     type: 3}
   sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
     type: 3}
+  atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
+    type: 3}
 --- !u!4 &509064007
 Transform:
   m_ObjectHideFlags: 0
@@ -1926,9 +1928,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StarPrefab: {fileID: 638461837045462306, guid: 43c3e0eae13b1654592229fe715dad49,
     type: 3}
-  StarOrbitRadius: 200
-  StarOrbitSpeed: 5
-  StarTiltAngle: 5
 --- !u!1 &999192725
 GameObject:
   m_ObjectHideFlags: 0

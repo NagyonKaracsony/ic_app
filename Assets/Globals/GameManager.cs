@@ -28,5 +28,17 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this) Destroy(gameObject);
+
+        GameObject ship = new GameObject("Ship");
+
+        Ship myShip = ship.AddComponent<Ship>();
+
+        myShip.SetDestination(new Vector3(50, 0, 50));
+
+        myShip.SetDestination(new Vector3(100, 0, 100));
+
+        myShip.RemoveQueuedDestination(new Vector3(100, 0, 100));
+
+        myShip.SetDestination(new Vector3(300, 0, 400));
     }
 }

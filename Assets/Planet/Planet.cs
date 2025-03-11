@@ -122,6 +122,14 @@ public class Planet : MonoBehaviour
         for (int i = 0; i < landColorData["biomes"].Count(); i++) planetComponent.colorSettings.biomeColorSettings.biomes[i].gradient = DeserializeGradient((JObject)landColorData["biomes"][i]["gradient"], 0.5f);
 
         colliderComponent.radius = planetComponent.shapeSettings.planetRadius;
+
+        GameObject atmosphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        atmosphere.transform.parent = planet.transform;
+        atmosphere.transform.position = new Vector3(0, 0, 0);
+        atmosphere.GetComponent<MeshRenderer>().material = new(materialsHolder.atmosphereMaterial);
+
+        atmosphere.transform.localScale = new Vector3(2.05f, 2.05f, 2.05f);
+
         planetComponent.GeneratePlanet();
         return planet;
     }

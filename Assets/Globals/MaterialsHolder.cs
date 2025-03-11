@@ -6,6 +6,7 @@ namespace Assets
         public Material planetMaterial;
         public Material starMaterial;
         public Material sectorMaterial;
+        public Material atmosphereMaterial;
         public MaterialsHolder()
         {
 

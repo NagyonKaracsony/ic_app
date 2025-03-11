@@ -549,7 +549,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 8.0,
+    "m_Value": 4.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -616,7 +616,7 @@
     "m_ShaderOutputName": "B",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 25.0,
+        "x": 45.0,
         "y": 2.0,
         "z": 2.0,
         "w": 2.0
@@ -848,10 +848,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -554.3999633789063,
-            "y": 317.6000061035156,
-            "width": 167.99993896484376,
-            "height": 33.5999755859375
+            "x": -554.0,
+            "y": 317.0,
+            "width": 169.0,
+            "height": 34.000030517578128
         }
     },
     "m_Slots": [
@@ -2091,7 +2091,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Smoothness",
     "m_StageCapability": 2,
-    "m_Value": 0.4000000059604645,
+    "m_Value": 0.25,
     "m_DefaultValue": 0.5,
     "m_Labels": []
 }
@@ -2391,10 +2391,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1592.0,
-            "y": 203.20001220703126,
+            "x": -1593.0,
+            "y": 203.0,
             "width": 184.0,
-            "height": 33.59996032714844
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -2766,8 +2766,8 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.0740918442606926,
-        "g": 0.09433960914611817,
+        "r": 0.250980406999588,
+        "g": 0.0,
         "b": 0.0,
         "a": 0.0
     },
@@ -2845,10 +2845,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1384.8001708984375,
-            "y": 284.7999572753906,
-            "width": 140.0,
-            "height": 33.600006103515628
+            "x": -1384.0,
+            "y": 284.0,
+            "width": 139.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -2982,7 +2982,7 @@
     ],
     "synonyms": [],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 2,
     "m_CustomColors": {
