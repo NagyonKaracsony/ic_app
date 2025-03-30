@@ -172,6 +172,15 @@ public class Planet : MonoBehaviour
         }
         colliderComponent.radius = planetComponent.shapeSettings.planetRadius;
 
+<<<<<<< Updated upstream
+=======
+        GameObject atmosphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        atmosphere.transform.parent = planet.transform;
+        atmosphere.transform.position = new Vector3(0, 0, 0);
+        atmosphere.GetComponent<MeshRenderer>().material = new(materialsHolder.atmosphereMaterial);
+        atmosphere.transform.localScale = new Vector3(2.05f, 2.05f, 2.05f);
+
+>>>>>>> Stashed changes
         planetComponent.GeneratePlanet();
         return planet;
     }
