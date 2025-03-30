@@ -4,18 +4,16 @@ public class ActionController : MonoBehaviour
 {
     public Camera MainCamera;
     public Camera SystemCamera;
-    public Camera GalaxyCamera;
     private int CameraIndex = 0;
     private Camera[] Cameras;
     private ICameraController[] Controllers;
     void Start()
     {
-        Cameras = new Camera[] { MainCamera, SystemCamera, GalaxyCamera };
+        Cameras = new Camera[] { MainCamera, SystemCamera };
         Controllers = new ICameraController[]
         {
             MainCamera.GetComponent<MainCameraController>(),
             SystemCamera.GetComponent<SectorCameraController>(),
-            GalaxyCamera.GetComponent<GalaxyCameraController>()
         };
     }
     void Update()
