@@ -14,6 +14,7 @@ public class Planet : MonoBehaviour
 
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
+    public PlanetProperties planetProperties;
 
     public string saveTemplateAs;
 
@@ -122,6 +123,8 @@ public class Planet : MonoBehaviour
         for (int i = 0; i < landColorData["biomes"].Count(); i++) planetComponent.colorSettings.biomeColorSettings.biomes[i].gradient = DeserializeGradient((JObject)landColorData["biomes"][i]["gradient"], 0.5f);
 
         colliderComponent.radius = planetComponent.shapeSettings.planetRadius;
+
+        // planetComponent.planetProperties.
 
         GameObject atmosphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         atmosphere.transform.parent = planet.transform;

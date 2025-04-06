@@ -5,6 +5,7 @@ public class PlanetData
     public int resolution;
     public string shapeSettings;
     public string colorSettings;
+    public string planetProperties;
     public PlanetData(Planet planet)
     {
         Material planetMaterial = new Material(planet.colorSettings.planetMaterial);
@@ -14,5 +15,6 @@ public class PlanetData
         deMaterializedColorSettings.planetMaterial = null;
         colorSettings = JsonUtility.ToJson(deMaterializedColorSettings, true);
         planet.colorSettings.planetMaterial = planetMaterial;
+        planetProperties = JsonUtility.ToJson(planet.planetProperties, true);
     }
 }
