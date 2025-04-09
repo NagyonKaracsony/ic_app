@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 namespace Assets
 {
-    public class GameEventsHandler : MonoBehaviour
+    public class GameTimeHandler : MonoBehaviour
     {
         private DateTime InGameTime = new DateTime(2200, 1, 1);
         public RefrenceHolder refrenceHolder;
