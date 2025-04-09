@@ -2,17 +2,17 @@ using Assets;
 using UnityEngine;
 public class StarSystem : MonoBehaviour
 {
-    public GameObject StarPrefab;
     private GameObject SystemSectors;
     private GameObject star;
     void Start()
     {
         MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
+        RefrenceHolder refrenceHolder = FindObjectOfType<RefrenceHolder>();
         SystemSectors = new("SystemSectors");
         SystemSectors SystemSectorsComponent = SystemSectors.AddComponent<SystemSectors>();
         SystemSectorsComponent.CreateNew(new Material(materialsHolder.sectorMaterial), 8);
 
-        Instantiate(StarPrefab, transform.transform);
+        Instantiate(refrenceHolder.StarPrefab, transform.transform);
     }
     void Update()
     {
