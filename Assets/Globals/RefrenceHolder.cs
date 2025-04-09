@@ -6,6 +6,8 @@ namespace Assets
         public Camera MainCamera;
         public Camera SectorCamera;
         public Canvas MainCanvas;
+        public GameObject StarPrefab;
+        public GameObject UIPrefrab;
         public RefrenceHolder()
         {
 
