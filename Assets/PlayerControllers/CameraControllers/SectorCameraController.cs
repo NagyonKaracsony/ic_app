@@ -4,7 +4,7 @@ namespace Assets
     public class SectorCameraController : MonoBehaviour, ICameraController
     {
         public Vector3 FocusPoint;
-        private float DistanceFromFocus;
+        private float DistanceFromFocus = 10f;
         private float CameraZoomSpeed = 2;
         private float CameraMoveSpeed = 30;
         public void HandleCameraMovement()

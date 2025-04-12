@@ -23,17 +23,26 @@ public class EventManager : MonoBehaviour
     }
     private void ApplyEffects(List<Effect> effects)
     {
+        Civilization civilization = GameManager.playerCivilization;
         foreach (var effect in effects)
         {
             switch (effect.type)
             {
-                case "addInfluence":
-                    Debug.Log($"+{effect.value} Influence");
+                case "addEnergy":
+                    civilization.Energy += effect.value;
                     break;
-                case "addUnity":
-                    Debug.Log($"+{effect.value} Unity");
+                case "addMetal":
+                    civilization.Metals += effect.value;
                     break;
-                    // Add more effect types here
+                case "addFood":
+                    civilization.Food += effect.value;
+                    break;
+                case "addAlloy":
+                    civilization.Alloy += effect.value;
+                    break;
+                case "addConsumer":
+                    civilization.Consumer += effect.value;
+                    break;
             }
         }
     }

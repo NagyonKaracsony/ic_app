@@ -5,67 +5,52 @@ namespace Assets
 {
     public class GameTimeHandler : MonoBehaviour
     {
-        private DateTime InGameTime = new DateTime(2200, 1, 1);
+        private DateTime InGameTime = new DateTime(2200, 01, 01);
         public RefrenceHolder refrenceHolder;
         public static int InGameTimeScale = 0;
-        private float timer = 0f;
+        public static int LastGameTimeScale = 1;
+        private float tickTimer = 0f;
+        public float baseTickInterval = 1f; // 1 second per tick at 1x speed
+        public GameObject DateDisplay;
+        public GameObject TimeScaleDisplay;
         void Start()
         {
             refrenceHolder = FindObjectOfType<RefrenceHolder>();
             InGameTimeScale = 0;
-            refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
-            refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Paused";
+            DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
+            TimeScaleDisplay.GetComponent<TextMeshProUGUI>().text = "Paused";
         }
-        private void SecondaryUpdate()
+        public void SetInGameTime(int timeIndex)
         {
-            InGameTime = InGameTime.AddDays(1);
-            refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
+            if (timeIndex == 0 && InGameTimeScale != 0) LastGameTimeScale = InGameTimeScale;
+            InGameTimeScale = timeIndex;
+            Time.timeScale = InGameTimeScale;
+            if (timeIndex != 0) TimeScaleDisplay.GetComponent<TextMeshProUGUI>().text = $"{timeIndex}x";
+            else TimeScaleDisplay.GetComponent<TextMeshProUGUI>().text = "Paused";
+        }
+        public void SetLastGameTime()
+        {
+            Time.timeScale = LastGameTimeScale;
+            TimeScaleDisplay.GetComponent<TextMeshProUGUI>().text = $"{LastGameTimeScale}x";
         }
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
+            float adjustedInterval = baseTickInterval / InGameTimeScale;
+            if (InGameTimeScale == 0f) return; // paused
+            else
             {
-                InGameTimeScale = 0;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Paused";
+                tickTimer += Time.deltaTime;
+                if (tickTimer >= adjustedInterval)
+                {
+                    tickTimer = 0f;
+                    Tick();
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                InGameTimeScale = 1;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "1x";
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                InGameTimeScale = 2;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "2x";
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                InGameTimeScale = 3;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "3x";
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                InGameTimeScale = 4;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "4x";
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                InGameTimeScale = 5;
-                Time.timeScale = InGameTimeScale;
-                refrenceHolder.MainCanvas.transform.GetChild(1).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "5x";
-            }
-            // Secondary update
-            timer += Time.deltaTime;
-            if (timer >= 1f)
-            {
-                timer = 0f;
-                SecondaryUpdate();
-            }
+        }
+        private void Tick()
+        {
+            InGameTime = InGameTime.AddDays(1);
+            DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
         }
     }
 }

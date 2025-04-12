@@ -5,7 +5,7 @@ namespace Assets
     public class MainCameraController : MonoBehaviour, ICameraController
     {
         public Vector3 FocusPoint;
-        private float DistanceFromFocus;
+        private float DistanceFromFocus = 10f;
         private static float OrbitSpeed = 30f;
         private float CameraZoomSpeed = 2f;
         private float CameraMoveSpeed = 30f;

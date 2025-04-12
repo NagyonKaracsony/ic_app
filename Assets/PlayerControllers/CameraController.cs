@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace Assets
 {
-    public class ActionController : MonoBehaviour
+    public class CameraController : MonoBehaviour
     {
         public Camera MainCamera;
         public Camera SystemCamera;
@@ -13,18 +13,18 @@ namespace Assets
             Cameras = new Camera[] { MainCamera, SystemCamera };
             Controllers = new ICameraController[]
             {
-            MainCamera.GetComponent<MainCameraController>(),
-            SystemCamera.GetComponent<SectorCameraController>(),
+                MainCamera.GetComponent<MainCameraController>(),
+                SystemCamera.GetComponent<SectorCameraController>(),
             };
         }
-        void Update()
+        public void CycleCamera()
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                Cameras[CameraIndex].enabled = false;
-                CameraIndex = (CameraIndex + 1) % Cameras.Length;
-                Cameras[CameraIndex].enabled = true;
-            }
+            Cameras[CameraIndex].enabled = false;
+            CameraIndex = (CameraIndex + 1) % Cameras.Length;
+            Cameras[CameraIndex].enabled = true;
+        }
+        private void Update()
+        {
             Controllers[CameraIndex].HandleCameraMovement();
         }
     }

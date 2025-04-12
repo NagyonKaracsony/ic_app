@@ -1,7 +1,11 @@
+using Assets;
+using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public static Civilization playerCivilization;
+    public static List<GameObject> UIPanels = new();
     public static GameManager Instance
     {
         get
@@ -28,5 +32,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else if (_instance != this) Destroy(gameObject);
+        UIPanels.Add(GameObject.Find("EventUI"));
+        playerCivilization = new Civilization();
     }
 }

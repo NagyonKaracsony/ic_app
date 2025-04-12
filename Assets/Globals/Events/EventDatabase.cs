@@ -7,7 +7,7 @@ public class EventDatabase : MonoBehaviour
     public static Dictionary<string, GameEvent> Events = new();
     void Awake()
     {
-        string json = File.ReadAllText(Application.dataPath + "../../Assets/Data/Events/Events.json");
+        string json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath + "\\Events\\Events.json"));
         List<GameEvent> loadedEvents = JsonUtility.FromJson<Wrapper>(WrapArray(json)).events;
 
         foreach (var e in loadedEvents) Events[e.id] = e;

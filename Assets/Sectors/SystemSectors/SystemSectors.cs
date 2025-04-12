@@ -1,5 +1,6 @@
 using Assets;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 public class SystemSectors : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class SystemSectors : MonoBehaviour
         hexagon.transform.Rotate(new Vector3(180, 0, 0));
         if (Random.Range(1, 15) <= 1)
         {
-            GameObject planet = Planet.LoadFrom("Assets\\Templates\\Planets\\GenerationTemplate.json", $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
+            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
             planet.transform.position = position;
         }
 
