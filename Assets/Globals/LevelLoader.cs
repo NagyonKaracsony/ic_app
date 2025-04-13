@@ -6,16 +6,27 @@ public class LevelLoader : MonoBehaviour
     public Animator transition;
     public void StartNewGame()
     {
-        StartCoroutine(LoadAsyncronously(1));
+        StartCoroutine(LoadSceneAsynchronously(1));
     }
-    IEnumerator LoadAsyncronously(int sceneIndex)
+    public void BackToMainMenu()
+    {
+        StartCoroutine(LoadScene(0));
+    }
+    public void BackToDesktop()
+    {
+        StartCoroutine(ExitGame());
+    }
+    IEnumerator ExitGame()
     {
         transition.SetTrigger("Start");
-
         yield return new WaitForSeconds(1f);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-
+        Application.Quit();
+    }
+    IEnumerator LoadSceneAsynchronously(int sceneIndex)
+    {
+        transition.SetTrigger("Start"); // Play scene change animation
+        yield return new WaitForSeconds(1f); // Wait for the animation to finish
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex); // Load the scene asynchronously
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
@@ -23,8 +34,10 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
     }
-    public void Quit()
+    IEnumerator LoadScene(int sceneIndex)
     {
-        Application.Quit();
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadSceneAsync(sceneIndex);
     }
 }

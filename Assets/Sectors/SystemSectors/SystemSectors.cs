@@ -25,33 +25,39 @@ public class SystemSectors : MonoBehaviour
             for (int r = r1; r <= r2; r++)
             {
                 Vector2Int axialCoords = new Vector2Int(q, r);
-                CreateHexagon(AxialToWorld(axialCoords), axialCoords);
+                CreateSector(AxialToWorld(axialCoords), axialCoords);
             }
         }
     }
-    private void CreateHexagon(Vector3 position, Vector2Int axialCoords)
+    private void CreateSector(Vector3 position, Vector2Int axialCoords)
     {
         MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
 
-        GameObject hexagon = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
-        hexagon.transform.position = position;
-        hexagon.transform.parent = transform;
+        GameObject sector = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
+        sector.transform.position = position;
+        sector.transform.parent = transform;
 
-        MeshFilter meshFilter = hexagon.AddComponent<MeshFilter>();
-        MeshRenderer meshRenderer = hexagon.AddComponent<MeshRenderer>();
-        MeshCollider meshCollider = hexagon.AddComponent<MeshCollider>();
-        hexagon.transform.Rotate(new Vector3(180, 0, 0));
+        MeshFilter meshFilter = sector.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = sector.AddComponent<MeshRenderer>();
+        MeshCollider meshCollider = sector.AddComponent<MeshCollider>();
+        sector.transform.Rotate(new Vector3(180, 0, 0));
+
         if (Random.Range(1, 15) <= 1)
         {
             GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
-            planet.transform.position = position;
+            planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
         }
 
         meshFilter.mesh = GenerateHexagonMesh();
         meshRenderer.material = hexagonMaterial;
         meshCollider.sharedMesh = meshFilter.mesh;
 
-        hexagonDictionary.Add(axialCoords, hexagon);
+        hexagonDictionary.Add(axialCoords, sector);
+    }
+    private Vector3 ChoseOffset()
+    {
+        int offsetter = Random.Range(2, 5);
+        return new Vector3(Random.Range(0, 2) <= 0 ? offsetter : -offsetter, 0, Random.Range(0, 2) <= 0 ? offsetter : -offsetter);
     }
     private Mesh GenerateHexagonMesh()
     {
@@ -60,7 +66,7 @@ public class SystemSectors : MonoBehaviour
         Vector3[] vertices = new Vector3[7]; // 6 corners + center
         int[] triangles = new int[18]; // 6 triangles, 3 vertices each
         vertices[0] = Vector3.zero; // Center
-        // Create vertices
+                                    // Create vertices
         for (int i = 0; i < 6; i++)
         {
             float angle = Mathf.Deg2Rad * (i * angleStep);

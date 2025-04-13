@@ -35,4 +35,15 @@ public class GameManager : MonoBehaviour
         UIPanels.Add(GameObject.Find("EventUI"));
         playerCivilization = new Civilization();
     }
+    private void Start()
+    {
+        GameObject ship1 = new GameObject("Ship1");
+        Ship shipComponent = ship1.AddComponent<Ship>();
+
+        // Move to a point
+        shipComponent.SetDestination(new Vector3(50, 0, 50));
+
+        // Queue another point
+        shipComponent.SetDestination(new Vector3(100, 0, 100));
+    }
 }

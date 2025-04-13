@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 namespace Assets
 {
     public class GameTimeHandler : MonoBehaviour
@@ -13,6 +14,23 @@ namespace Assets
         public float baseTickInterval = 1f; // 1 second per tick at 1x speed
         public GameObject DateDisplay;
         public GameObject TimeScaleDisplay;
+        private void Awake()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != "MainMenu")
+            {
+                refrenceHolder = GameObject.Find("RefrenceHolder").GetComponent<RefrenceHolder>();
+                DateDisplay = GameObject.Find("Counter");
+                TimeScaleDisplay = GameObject.Find("CounterStatus");
+            }
+        }
+        private void OnDestroy()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
         void Start()
         {
             refrenceHolder = FindObjectOfType<RefrenceHolder>();
