@@ -1,19 +1,57 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+public enum ShipType
+{
+    Transport,
+    Miner,
+    LigthBattleship,
+    MediumBattleship,
+    HeavyBattleship,
+    ColossalBattleship,
+    StealthBattleship,
+}
+public enum Modules
+{
+    None,
+    Engine,
+}
+
+public interface IShip
+{
+    public string Name { get; set; }
+    public ShipType Type { get; set; }
+    public float Speed { get; set; }
+    public List<Modules> modules { get; set; }
+    public void SetDestination(Vector3 destination);
+    public void RemoveLastQueuedDestination();
+}
+public interface ITransport
+{
+    public int Capacity { get; set; }
+    public int CurrentLoad { get; set; }
+    public int LoadingSpeed { get; set; }
+}
+public interface IMiner
+{
+    public int Capacity { get; set; }
+    public int CurrentLoad { get; set; }
+    public int MiningSpeed { get; set; }
+}
+public interface IBattleship
+{
+
+}
 public class Ship : MonoBehaviour
 {
     public string Name { get; private set; }
     public ShipType Type { get; private set; }
     public float Speed { get; private set; } = 1.0f;
-    public float Fuel { get; private set; } = 100f;
-    public float FuelConsumptionRate { get; private set; } = 1f; // Fuel per unit distance
 
     private Vector3? currentDestination;
     private Queue<Vector3> destinationQueue = new Queue<Vector3>();
 
     public event Action OnDestinationReached;
-    public event Action<float> OnFuelChanged; // Notify UI or other systems
     private void Update()
     {
         if (currentDestination.HasValue)
@@ -30,18 +68,8 @@ public class Ship : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, destination);
-        float fuelNeeded = distance * FuelConsumptionRate;
 
-        if (Fuel >= fuelNeeded)
-        {
-            Fuel -= fuelNeeded;
-            currentDestination = destination;
-        }
-        else
-        {
-            Debug.Log($"{Name} does not have enough fuel to reach this destination!");
-        }
-        OnFuelChanged?.Invoke(Fuel);
+        currentDestination = destination;
     }
 
     public void RemoveQueuedDestination(Vector3 destination)
@@ -54,8 +82,6 @@ public class Ship : MonoBehaviour
 
             // Refund fuel
             float distance = Vector3.Distance(transform.position, destination);
-            Fuel += distance * FuelConsumptionRate;
-            OnFuelChanged?.Invoke(Fuel);
         }
     }
 
@@ -78,10 +104,4 @@ public class Ship : MonoBehaviour
             }
         }
     }
-}
-public enum ShipType
-{
-    Transport,
-    Battleship,
-    Miner
 }
