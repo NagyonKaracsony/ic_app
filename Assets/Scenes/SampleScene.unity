@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 23529735}
   - component: {fileID: 23529734}
   - component: {fileID: 23529733}
-  - component: {fileID: 23529732}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -164,18 +163,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 170}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &23529732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23529730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &23529733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 23529732}
-        m_TargetAssemblyTypeName: CloseUI, Assembly-CSharp
-        m_MethodName: ClosePanel
+      - m_Target: {fileID: 1537526472}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: OpenSavePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -282,7 +269,6 @@ GameObject:
   - component: {fileID: 47137519}
   - component: {fileID: 47137518}
   - component: {fileID: 47137517}
-  - component: {fileID: 47137516}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -310,18 +296,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &47137516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47137514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &47137517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,9 +340,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 47137516}
-        m_TargetAssemblyTypeName: CloseUI, Assembly-CSharp
-        m_MethodName: ClosePanel
+      - m_Target: {fileID: 1537526472}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: OpenSettingsPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -503,7 +477,6 @@ GameObject:
   - component: {fileID: 72302744}
   - component: {fileID: 72302743}
   - component: {fileID: 72302742}
-  - component: {fileID: 72302741}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -531,18 +504,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 250}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &72302741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72302739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &72302742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,9 +548,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 72302741}
-        m_TargetAssemblyTypeName: CloseUI, Assembly-CSharp
-        m_MethodName: ClosePanel
+      - m_Target: {fileID: 1537526472}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: TogglePauseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2156,7 +2117,6 @@ GameObject:
   - component: {fileID: 530722404}
   - component: {fileID: 530722403}
   - component: {fileID: 530722402}
-  - component: {fileID: 530722401}
   m_Layer: 5
   m_Name: DesktopButton
   m_TagString: Untagged
@@ -2184,18 +2144,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &530722401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530722399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &530722402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4170,7 +4118,6 @@ GameObject:
   - component: {fileID: 1354183288}
   - component: {fileID: 1354183287}
   - component: {fileID: 1354183286}
-  - component: {fileID: 1354183285}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -4198,18 +4145,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1354183285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354183283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1354183286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4524,10 +4459,10 @@ GameObject:
   - component: {fileID: 1537526467}
   - component: {fileID: 1537526466}
   - component: {fileID: 1537526471}
+  - component: {fileID: 1537526472}
   - component: {fileID: 1537526468}
   - component: {fileID: 1537526469}
   - component: {fileID: 1537526470}
-  - component: {fileID: 1537526472}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -5954,7 +5889,6 @@ GameObject:
   - component: {fileID: 2139070470}
   - component: {fileID: 2139070469}
   - component: {fileID: 2139070468}
-  - component: {fileID: 2139070467}
   m_Layer: 5
   m_Name: LoadButton
   m_TagString: Untagged
@@ -5982,18 +5916,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2139070467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139070465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c008ee526fd2b04488ffd9af4277573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2139070468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6038,9 +5960,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2139070467}
-        m_TargetAssemblyTypeName: CloseUI, Assembly-CSharp
-        m_MethodName: ClosePanel
+      - m_Target: {fileID: 1537526472}
+        m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
+        m_MethodName: OpenLoadPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6170,6 +6092,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_enableVertexGradient
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498187482496473978, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1537526465}
+    - target: {fileID: 2498187482496473978, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2961138649968386723, guid: 716142bd67614a14fa07117aab2f606a,
         type: 3}
@@ -6311,6 +6243,16 @@ PrefabInstance:
       propertyPath: m_enableVertexGradient
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5211687618866113999, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1537526465}
+    - target: {fileID: 5211687618866113999, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5953104805858625719, guid: 716142bd67614a14fa07117aab2f606a,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -6340,6 +6282,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 325
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189065221409559482, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1537526472}
+    - target: {fileID: 6189065221409559482, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickKillPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189065221409559482, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InputHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6489576099859603194, guid: 716142bd67614a14fa07117aab2f606a,
         type: 3}
@@ -6581,12 +6538,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8653396768267761977, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1537526465}
+    - target: {fileID: 8653396768267761977, guid: 716142bd67614a14fa07117aab2f606a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8870879318482972222, guid: 716142bd67614a14fa07117aab2f606a,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6012295527814431636, guid: 716142bd67614a14fa07117aab2f606a, type: 3}
+    - {fileID: 3789606270900742125, guid: 716142bd67614a14fa07117aab2f606a, type: 3}
+    - {fileID: 6824196577420522780, guid: 716142bd67614a14fa07117aab2f606a, type: 3}
+    - {fileID: 2415866961795138117, guid: 716142bd67614a14fa07117aab2f606a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

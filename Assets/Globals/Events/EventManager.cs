@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
         ApplyEffects(option.effects);
 
         if (!string.IsNullOrEmpty(option.nextEvent)) TriggerEvent(option.nextEvent);
-        else  HideEventUI();
+        else HideEventUI();
     }
     private void ApplyEffects(List<Effect> effects)
     {
@@ -48,11 +48,7 @@ public class EventManager : MonoBehaviour
     }
     private void ShowEventUI(GameEvent e)
     {
-        Debug.Log($"[Event] {e.title}\n{e.description}");
-        foreach (var opt in e.options)
-        {
-            if (CheckConditions(opt.conditions)) Debug.Log($"→ {opt.text}");
-        }
+        foreach (var opt in e.options) if (CheckConditions(opt.conditions)) Debug.Log($"→ {opt.text}");
     }
     private bool CheckConditions(List<Condition> conditions)
     {

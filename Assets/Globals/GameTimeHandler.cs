@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 namespace Assets
@@ -67,8 +68,11 @@ namespace Assets
         }
         private void Tick()
         {
-            InGameTime = InGameTime.AddDays(1);
-            DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
+            if (!DateDisplay.IsDestroyed())
+            {
+                InGameTime = InGameTime.AddDays(1);
+                DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
+            }
         }
     }
 }

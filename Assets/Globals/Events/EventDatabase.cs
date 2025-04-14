@@ -11,7 +11,6 @@ public class EventDatabase : MonoBehaviour
         List<GameEvent> loadedEvents = JsonUtility.FromJson<Wrapper>(WrapArray(json)).events;
 
         foreach (var e in loadedEvents) Events[e.id] = e;
-        Debug.Log("Loaded " + Events.Count + " events");
     }
     [System.Serializable]
     private class Wrapper

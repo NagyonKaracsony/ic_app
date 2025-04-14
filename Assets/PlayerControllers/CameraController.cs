@@ -53,7 +53,7 @@ namespace Assets
         }
         private void Update()
         {
-            if (!MainCamera.IsDestroyed() && !SystemCamera.IsDestroyed()) Controllers[CameraIndex].HandleCameraMovement();
+            if (!MainCamera.IsDestroyed() && !SystemCamera.IsDestroyed() && !InputHandler.pauseMenuState) Controllers[CameraIndex].HandleCameraMovement();
         }
     }
 }

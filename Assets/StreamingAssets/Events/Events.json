@@ -38,13 +38,13 @@
     ]
   },
   {
-    "id": "event.peace_response",
-    "title": "Peace Accepted",
-    "description": "They agree to diplomatic talks.",
+    "id": "event.glorious_unification",
+    "title": "The End of Nations",
+    "description": "Chancellor, I wanted you to be the first to know—the last nations of our homeworld have dissolved their borders.\nThere was no war, no bloodshed. No treaties forced under duress. Simply an understanding acknowledgment that in this era, in this age of interstellar ambition, we can no longer afford to be divided by old lines drawn in the dirt.\nWe have become something more than separate peoples with separate flags. And so today, for the first time in history, our species speaks with a single voice.\nWhen historians look back on this day, they will see it not as an end, but as the beginning of something greater",
     "options": [
       {
         "id": "option_continue",
-        "text": "Continue your journey.",
+        "text": "We're on the same side at last",
         "conditions": [
           {
             "type": "hasFleetPower",
@@ -54,7 +54,24 @@
         "effects": [
           {
             "type": "addUnity",
-            "value": 25
+            "value": 500
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "event.glorious_unification",
+    "title": "The End of Nations",
+    "description": "We may have found the holy grail of materials science.\nThe new alloy synthesized on our homeworld is stronger than steel, lighter than aerogel, and it shines with a natural iridescence, shifting between deep blues and golds. The researchers swear it wasn't engineered for beauty—it simply turned out this way.\nWe have run the numbers. Mass production would be trivial. Every hull, every structure, every piece of equipment in our empire could be replaced within a few years, and from now on, manufactured with this material although it's more expensive then what we would replace with it, might just be worth it.",
+    "options": [
+      {
+        "id": "option_continue",
+        "text": "Ramp up production, replace everything we can with it!",
+        "effects": [
+          {
+            "type": "addUnity",
+            "value": 500
           }
         ]
       }
