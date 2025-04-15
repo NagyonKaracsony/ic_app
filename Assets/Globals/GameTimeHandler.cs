@@ -54,16 +54,13 @@ namespace Assets
         }
         void Update()
         {
-            float adjustedInterval = baseTickInterval / InGameTimeScale;
-            if (InGameTimeScale == 0f) return; // paused
-            else
+            if (InGameTimeScale == 0) return;
+
+            tickTimer += Time.deltaTime;
+            if (tickTimer >= baseTickInterval)
             {
-                tickTimer += Time.deltaTime;
-                if (tickTimer >= adjustedInterval)
-                {
-                    tickTimer = 0f;
-                    Tick();
-                }
+                tickTimer = 0f;
+                Tick();
             }
         }
         private void Tick()
