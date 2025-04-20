@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 public class Planet : MonoBehaviour
 {
@@ -101,13 +102,13 @@ public class Planet : MonoBehaviour
         System.IO.File.WriteAllText(filePath, "");
         System.IO.File.WriteAllText(filePath, json.ToString(Formatting.None));
     }
-    public static GameObject LoadFrom(string filePath, string name, MaterialsHolder materialsHolder)
+    public static GameObject LoadFrom(string filePath, string name)
     {
         GameObject planet = new(name);
         Planet planetComponent = planet.AddComponent<Planet>();
         SphereCollider colliderComponent = planet.AddComponent<SphereCollider>();
 
-        planetComponent.resolution = 128;
+        planetComponent.resolution = 64;
         planetComponent.shapeSettings = ScriptableObject.CreateInstance<ShapeSettings>();
         planetComponent.colorSettings = ScriptableObject.CreateInstance<ColorSettings>();
 
@@ -116,7 +117,7 @@ public class Planet : MonoBehaviour
 
         planetComponent.shapeSettings = JsonConvert.DeserializeObject<ShapeSettings>(jsonObject["shapeSettings"].ToString());
         planetComponent.colorSettings = JsonConvert.DeserializeObject<ColorSettings>(jsonObject["colorSettings"].ToString());
-        planetComponent.colorSettings.planetMaterial = new Material(materialsHolder.planetMaterial);
+        planetComponent.colorSettings.planetMaterial = new Material(ReferenceHolder.Instance.planetMaterial);
 
         planetComponent.colorSettings.oceanColor = DeserializeGradient((JObject)jsonObject["colorSettings"]["oceanColor"], 0.3f);
         var landColorData = (JObject)jsonObject["colorSettings"]["biomeColorSettings"];
@@ -129,7 +130,7 @@ public class Planet : MonoBehaviour
         GameObject atmosphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         atmosphere.transform.parent = planet.transform;
         atmosphere.transform.position = new Vector3(0, 0, 0);
-        atmosphere.GetComponent<MeshRenderer>().material = new(materialsHolder.atmosphereMaterial);
+        atmosphere.GetComponent<MeshRenderer>().material = new(ReferenceHolder.Instance.atmosphereMaterial);
 
         atmosphere.transform.localScale = new Vector3(2.05f, 2.05f, 2.05f);
 

@@ -6,6 +6,8 @@ public class InputHandler : MonoBehaviour
     public static bool pauseMenuState = false;
     public static bool isNestedInPauseMenu = false;
     public static bool isInMainMenu = true;
+    public static GameObject previousSelectedObject;
+    public static GameObject currentSelectedObject;
     void Update()
     {
         if (!isInMainMenu)
@@ -22,6 +24,18 @@ public class InputHandler : MonoBehaviour
 
                 // Handling camera cycling
                 if (Input.GetKeyDown(KeyCode.M)) transform.gameObject.GetComponent<CameraController>().CycleCamera();
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Vector3 mousePosition = Input.mousePosition;
+                    if (Physics.Raycast(CameraController.CurrentCamera.ScreenPointToRay(mousePosition), out RaycastHit raycasHit))
+                    {
+                        Debug.Log(raycasHit.transform.name);
+                        previousSelectedObject = currentSelectedObject;
+                        currentSelectedObject = raycasHit.transform.gameObject;
+                    }
+                    else Debug.Log("Nothing was hit by the raycast");
+                }
             }
 
             // Handling pause menu toggling
@@ -34,7 +48,7 @@ public class InputHandler : MonoBehaviour
     }
     public void TogglePauseMenu()
     {
-        FindObjectOfType<RefrenceHolder>().PauseMenu.SetActive(!pauseMenuState);
+        ReferenceHolder.Instance.PauseMenu.SetActive(!pauseMenuState);
         if (pauseMenuState) transform.gameObject.GetComponent<GameTimeHandler>().SetLastGameTime();
         else transform.gameObject.GetComponent<GameTimeHandler>().SetInGameTime(0);
         pauseMenuState = !pauseMenuState;

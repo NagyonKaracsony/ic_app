@@ -23,25 +23,19 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+    public void SaveGame()
+    {
+
+    }
+    public void LoadGame()
+    {
+
+    }
     private void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
+        if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         UIPanels.Add(GameObject.Find("EventUI"));
         playerCivilization = new Civilization();
-    }
-    private void Start()
-    {
-        GameObject ship1 = new GameObject("Ship1");
-        Ship shipComponent = ship1.AddComponent<Ship>();
-
-        // Move to a point
-        shipComponent.SetDestination(new Vector3(50, 0, 50));
-
-        // Queue another point
-        shipComponent.SetDestination(new Vector3(100, 0, 100));
     }
 }

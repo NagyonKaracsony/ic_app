@@ -7,17 +7,18 @@ namespace Assets
     {
         public Camera MainCamera;
         public Camera SystemCamera;
-        private int CameraIndex = 0;
-        private Camera[] Cameras;
-        private ICameraController[] Controllers;
+        private static Camera[] Cameras;
+        public static int CameraIndex = 0;
+        public static ICameraController[] Controllers;
+        public static Camera CurrentCamera;
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         void Start()
         {
-            MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            SystemCamera = GameObject.Find("SectorCamera").GetComponent<Camera>();
+            MainCamera = ReferenceHolder.Instance.MainCamera;
+            SystemCamera = ReferenceHolder.Instance.SectorCamera;
 
             Cameras = new Camera[] { MainCamera, SystemCamera };
             Controllers = new ICameraController[]
@@ -25,19 +26,21 @@ namespace Assets
                 MainCamera.GetComponent<MainCameraController>(),
                 SystemCamera.GetComponent<SectorCameraController>(),
             };
+            CurrentCamera = Cameras[0];
         }
         public void CycleCamera()
         {
             Cameras[CameraIndex].enabled = false;
             CameraIndex = (CameraIndex + 1) % Cameras.Length;
             Cameras[CameraIndex].enabled = true;
+            CurrentCamera = Cameras[CameraIndex];
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             if (scene.name != "MainMenu")
             {
-                MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-                SystemCamera = GameObject.Find("SectorCamera").GetComponent<Camera>();
+                MainCamera = ReferenceHolder.Instance.MainCamera;
+                SystemCamera = ReferenceHolder.Instance.SectorCamera;
 
                 Cameras = new Camera[] { MainCamera, SystemCamera };
                 Controllers = new ICameraController[]

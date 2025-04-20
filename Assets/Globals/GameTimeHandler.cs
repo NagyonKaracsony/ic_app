@@ -8,9 +8,9 @@ namespace Assets
     public class GameTimeHandler : MonoBehaviour
     {
         private DateTime InGameTime = new DateTime(2200, 01, 01);
-        public RefrenceHolder refrenceHolder;
         public static int InGameTimeScale = 0;
         public static int LastGameTimeScale = 1;
+        public static bool IsLoading = false;
         private float tickTimer = 0f;
         public float baseTickInterval = 1f; // 1 second per tick at 1x speed
         public GameObject DateDisplay;
@@ -18,12 +18,13 @@ namespace Assets
         private void Awake()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            IsLoading = false;
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            IsLoading = false;
             if (scene.name != "MainMenu")
             {
-                refrenceHolder = GameObject.Find("RefrenceHolder").GetComponent<RefrenceHolder>();
                 DateDisplay = GameObject.Find("Counter");
                 TimeScaleDisplay = GameObject.Find("CounterStatus");
             }
@@ -34,7 +35,6 @@ namespace Assets
         }
         void Start()
         {
-            refrenceHolder = FindObjectOfType<RefrenceHolder>();
             InGameTimeScale = 0;
             DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
             TimeScaleDisplay.GetComponent<TextMeshProUGUI>().text = "Paused";
@@ -54,22 +54,28 @@ namespace Assets
         }
         void Update()
         {
-            if (InGameTimeScale == 0) return;
+            if (InGameTimeScale == 0 || IsLoading) return;
 
             tickTimer += Time.deltaTime;
             if (tickTimer >= baseTickInterval)
             {
                 tickTimer = 0f;
-                Tick();
+                MainTick();
             }
+            SecondaryTick();
         }
-        private void Tick()
+        private void MainTick()
         {
             if (!DateDisplay.IsDestroyed())
             {
                 InGameTime = InGameTime.AddDays(1);
                 DateDisplay.GetComponent<TextMeshProUGUI>().text = InGameTime.ToString("yyyy-MM-dd");
+                ShipHandler.HandleCombatTick();
             }
+        }
+        private void SecondaryTick()
+        {
+
         }
     }
 }

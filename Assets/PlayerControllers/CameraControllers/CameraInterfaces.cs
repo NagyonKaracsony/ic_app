@@ -1,7 +1,7 @@
 using System.Numerics;
 namespace Assets
 {
-    interface ICameraController
+    public interface ICameraController
     {
         public static Vector3 FocusPoint = new(0, 0, 0);
         public static float DistanceFromFocus = 25f;

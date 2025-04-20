@@ -25,6 +25,7 @@ public class LevelLoader : MonoBehaviour
     }
     IEnumerator LoadSceneAsynchronously(int sceneIndex)
     {
+        GameTimeHandler.IsLoading = true; // Set loading state to true
         if (sceneIndex == 0)
         {
             FindAnyObjectByType<InputHandler>().TogglePauseMenu();
@@ -39,7 +40,6 @@ public class LevelLoader : MonoBehaviour
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            Debug.LogWarning($"Loading progress: {operation.progress}%");
             yield return null;
         }
     }

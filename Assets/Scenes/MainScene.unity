@@ -1731,7 +1731,7 @@ GameObject:
   - component: {fileID: 449481285}
   - component: {fileID: 449481284}
   m_Layer: 0
-  m_Name: Global Volume
+  m_Name: GlobalVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2401,6 +2401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 733445557}
   - component: {fileID: 733445558}
+  - component: {fileID: 733445559}
   m_Layer: 0
   m_Name: StarSystem
   m_TagString: Untagged
@@ -2435,6 +2436,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7300675c9b0b32498acca3a23c71e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &733445559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733445555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: ed432498a344fa04293850a9041cd3ad, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &772505750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,58 +2810,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849359516}
   m_CullTransparentMesh: 1
---- !u!1 &878334265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 878334267}
-  - component: {fileID: 878334266}
-  m_Layer: 0
-  m_Name: MaterialsHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &878334266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878334265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec01f4a07c9efe46b3e7baf0fe3e6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
-    type: 3}
-  starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
-    type: 3}
-  sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
-    type: 3}
-  atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
-    type: 3}
---- !u!4 &878334267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878334265}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &898149425
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3081,7 +3061,7 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194231}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4463,6 +4443,7 @@ GameObject:
   - component: {fileID: 1537526468}
   - component: {fileID: 1537526469}
   - component: {fileID: 1537526470}
+  - component: {fileID: 1537526473}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -4509,7 +4490,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea4a21e3b3df8e43858ab837a6dec24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refrenceHolder: {fileID: 1715935566}
   baseTickInterval: 1
   DateDisplay: {fileID: 503197785}
   TimeScaleDisplay: {fileID: 153254071}
@@ -4568,6 +4548,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e8ff611d06435428ec53cd36b38dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1537526473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537526465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876dd147589251a489513986b8050800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1577659997
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,7 +4571,6 @@ GameObject:
   - component: {fileID: 1577659998}
   - component: {fileID: 1577660001}
   - component: {fileID: 1577660000}
-  - component: {fileID: 1577659999}
   m_Layer: 0
   m_Name: BackgroundSphere
   m_TagString: Untagged
@@ -4602,27 +4593,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1577659999
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1577659997}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1577660000
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4849,7 +4819,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1715935565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4757bb68a64d4d64cb0fa6873e4736d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 50961104b6cd74248b7ffd328b3b3d33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 963194227}
@@ -4858,7 +4828,15 @@ MonoBehaviour:
   StarPrefab: {fileID: 638461837045462306, guid: 43c3e0eae13b1654592229fe715dad49,
     type: 3}
   PauseMenu: {fileID: 2050982906}
-  UIPrefrab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
+  UIPrefab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
+    type: 3}
+  planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
+    type: 3}
+  starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
+    type: 3}
+  sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
+    type: 3}
+  atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
     type: 3}
 --- !u!4 &1715935567
 Transform:
@@ -6571,7 +6549,6 @@ SceneRoots:
   - {fileID: 1537526467}
   - {fileID: 963194228}
   - {fileID: 1790412745}
-  - {fileID: 878334267}
   - {fileID: 1715935567}
   - {fileID: 449481285}
   - {fileID: 733445557}

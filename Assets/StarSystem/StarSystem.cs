@@ -1,22 +1,34 @@
 using Assets;
+using System.Collections;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 public class StarSystem : MonoBehaviour
 {
     private GameObject SystemSectors;
-    private GameObject star;
-    void Start()
+    private void Start()
     {
-        MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
-        RefrenceHolder refrenceHolder = FindObjectOfType<RefrenceHolder>();
         SystemSectors = new("SystemSectors");
         SystemSectors SystemSectorsComponent = SystemSectors.AddComponent<SystemSectors>();
-        SystemSectorsComponent.CreateNew(new Material(materialsHolder.sectorMaterial), 8);
+        SystemSectorsComponent.CreateNew(new Material(ReferenceHolder.Instance.sectorMaterial), 8);
 
-        Instantiate(refrenceHolder.StarPrefab, transform.transform);
+        Instantiate(ReferenceHolder.Instance.StarPrefab, transform.transform);
+        StartCoroutine(CreateNavMesh());
     }
-    void Update()
+    public IEnumerator CreateNavMesh()
     {
+        NavMeshObstacle navMeshObstacleComponent = SystemSectors.AddComponent<NavMeshObstacle>();
+        navMeshObstacleComponent.shape = NavMeshObstacleShape.Capsule;
+        navMeshObstacleComponent.carving = true;
+        navMeshObstacleComponent.carveOnlyStationary = true;
+        navMeshObstacleComponent.radius = 3f;
 
+        yield return new WaitForEndOfFrame();
+        gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        ShipHandler.SpawnShip(new Vector3(10, 0, 10), 0, 40);
+        ShipHandler.SpawnShip(new Vector3(30, 0, 30), 1, 40);
+        ShipHandler.SetShipTarget(new Vector3(20, 0, 20));
     }
     private StarSystem LoadStarSystemFromSave(string saveId)
     {

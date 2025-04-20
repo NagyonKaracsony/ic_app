@@ -1,7 +1,6 @@
 using Assets;
 using System.IO;
 using UnityEngine;
-
 public class MainMenuScript : MonoBehaviour
 {
     private readonly GameObject[] planets = new GameObject[3]; // planet game objects
@@ -27,8 +26,6 @@ public class MainMenuScript : MonoBehaviour
 
     void Start()
     {
-        MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
-
         // create the star game object its light source
         Star = Instantiate(StarPrefab);
         Star.transform.position = new Vector3(0, 0, 0);
@@ -38,7 +35,7 @@ public class MainMenuScript : MonoBehaviour
         pointLight.range = 500;
 
         // create the planet game objects 
-        for (int i = 0; i < planets.Length; i++) planets[i] = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet", materialsHolder);
+        for (int i = 0; i < planets.Length; i++) planets[i] = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet");
 
         // set up the planets with absolute properties
         PlanetData[] planetData = new PlanetData[] {

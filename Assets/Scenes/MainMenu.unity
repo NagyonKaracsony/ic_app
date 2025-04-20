@@ -123,6 +123,66 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &23425377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 23425379}
+  - component: {fileID: 23425378}
+  m_Layer: 0
+  m_Name: RefrenceHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &23425378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23425377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50961104b6cd74248b7ffd328b3b3d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 584415768}
+  SectorCamera: {fileID: 0}
+  MainCanvas: {fileID: 0}
+  StarPrefab: {fileID: 638461837045462306, guid: 43c3e0eae13b1654592229fe715dad49,
+    type: 3}
+  PauseMenu: {fileID: 0}
+  UIPrefab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
+    type: 3}
+  planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
+    type: 3}
+  starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
+    type: 3}
+  sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
+    type: 3}
+  atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
+    type: 3}
+--- !u!4 &23425379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23425377}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &54429842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,58 +1620,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445371425}
   m_CullTransparentMesh: 1
---- !u!1 &509064005
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 509064007}
-  - component: {fileID: 509064006}
-  m_Layer: 0
-  m_Name: MaterialsHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &509064006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509064005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ec01f4a07c9efe46b3e7baf0fe3e6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
-    type: 3}
-  starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
-    type: 3}
-  sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
-    type: 3}
-  atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
-    type: 3}
---- !u!4 &509064007
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509064005}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &551960698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,7 +1671,7 @@ GameObject:
   - component: {fileID: 584415767}
   - component: {fileID: 584415770}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4394,4 +4402,4 @@ SceneRoots:
   - {fileID: 996612247}
   - {fileID: 355715603}
   - {fileID: 2109372034}
-  - {fileID: 509064007}
+  - {fileID: 23425379}

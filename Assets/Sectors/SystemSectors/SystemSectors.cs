@@ -2,12 +2,12 @@ using Assets;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.AI;
 public class SystemSectors : MonoBehaviour
 {
     private int hexagonRadius = 10; // Radius of each hexagon
     private int hexagonGridRadius = 6; // Radius of the hexagonal grid (number of rings)
     private Material hexagonMaterial;
-
     private Dictionary<Vector2Int, GameObject> hexagonDictionary = new Dictionary<Vector2Int, GameObject>();
     public void CreateNew(Material sectorMaterial, int size)
     {
@@ -31,8 +31,6 @@ public class SystemSectors : MonoBehaviour
     }
     private void CreateSector(Vector3 position, Vector2Int axialCoords)
     {
-        MaterialsHolder materialsHolder = FindObjectOfType<MaterialsHolder>();
-
         GameObject sector = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
         sector.transform.position = position;
         sector.transform.parent = transform;
@@ -44,8 +42,14 @@ public class SystemSectors : MonoBehaviour
 
         if (Random.Range(1, 15) <= 1)
         {
-            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}", materialsHolder);
+            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}");
             planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
+
+            NavMeshObstacle navMeshObstacleComponent = planet.AddComponent<NavMeshObstacle>();
+            navMeshObstacleComponent.shape = NavMeshObstacleShape.Capsule;
+            navMeshObstacleComponent.carving = true;
+            navMeshObstacleComponent.carveOnlyStationary = true;
+            navMeshObstacleComponent.radius = 0.5f;
         }
 
         meshFilter.mesh = GenerateHexagonMesh();
