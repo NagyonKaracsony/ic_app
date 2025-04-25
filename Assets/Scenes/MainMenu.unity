@@ -160,6 +160,7 @@ MonoBehaviour:
   PauseMenu: {fileID: 0}
   UIPrefab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
     type: 3}
+  CanvasTopSide: {fileID: 0}
   planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
     type: 3}
   starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
@@ -1410,6 +1411,21 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1621124597896648627, guid: 6da11760d17378540b88ed6d4352862c,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 584415768}
+    - target: {fileID: 1621124597896648627, guid: 6da11760d17378540b88ed6d4352862c,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621124597896648627, guid: 6da11760d17378540b88ed6d4352862c,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5284695728782466811, guid: 6da11760d17378540b88ed6d4352862c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2236,9 +2252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1980, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

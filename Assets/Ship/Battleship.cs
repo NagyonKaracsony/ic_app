@@ -16,7 +16,7 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
     public Vector3? currentDestination { get; set; }
     public Queue<Vector3> destinationQueue { get; set; } = new Queue<Vector3>();
     public event Action OnDestinationReached;
-    public Collider[] Colliders { get; set; } = new Collider[32];
+    public Collider[] Colliders { get; set; } = new Collider[255];
     public byte ColliderHits { get; set; } = 0;
     public NavMeshAgent NavMeshAgent { get; set; } = new NavMeshAgent();
     public byte ownerID { get; set; } = 0;

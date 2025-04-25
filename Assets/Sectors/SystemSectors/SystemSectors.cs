@@ -32,6 +32,7 @@ public class SystemSectors : MonoBehaviour
     private void CreateSector(Vector3 position, Vector2Int axialCoords)
     {
         GameObject sector = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
+        sector.layer = 10;
         sector.transform.position = position;
         sector.transform.parent = transform;
 

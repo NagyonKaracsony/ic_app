@@ -4,7 +4,8 @@ using System.Text;
 using UnityEngine;
 
 public class ObjFromStream : MonoBehaviour {
-	void Start () {
+    [System.Obsolete]
+    void Start () {
         //make www
         var www = new WWW("https://people.sc.fsu.edu/~jburkardt/data/obj/lamp.obj");
         while (!www.isDone)

@@ -1,6 +1,7 @@
 using Assets;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 public class InputHandler : MonoBehaviour
 {
     public static bool pauseMenuState = false;
@@ -28,23 +29,56 @@ public class InputHandler : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector3 mousePosition = Input.mousePosition;
-                    if (Physics.Raycast(CameraController.CurrentCamera.ScreenPointToRay(mousePosition), out RaycastHit raycasHit))
+                    if (Physics.Raycast(CameraController.CurrentCamera.ScreenPointToRay(mousePosition), out RaycastHit raycastHit))
                     {
-                        Debug.Log(raycasHit.transform.name);
+                        GameObject hitObject = raycastHit.transform.gameObject;
+                        int targetLayer = hitObject.layer;
+                        switch (targetLayer)
+                        {
+                            case 6: // Ships
+                                DisplayShipUI(hitObject);
+                                break;
+                            case 7: // Planets
+                                DisplayPlanetUI(hitObject);
+                                break;
+                            case 9: // Stations
+                                DisplayStationUI(hitObject);
+                                break;
+                            case 10: // Sectors
+                                if (currentSelectedObject.GetComponent<Battleship>() != null)
+                                {
+                                    if (currentSelectedObject.GetComponent<Battleship>().ownerID == 0)
+                                    {
+                                        Vector3 temp = raycastHit.point;
+                                        temp.y = 0f;
+                                        currentSelectedObject.GetComponent<NavMeshAgent>().SetDestination(temp);
+                                    }
+                                }
+                                break;
+                        }
                         previousSelectedObject = currentSelectedObject;
-                        currentSelectedObject = raycasHit.transform.gameObject;
+                        currentSelectedObject = raycastHit.transform.gameObject;
                     }
-                    else Debug.Log("Nothing was hit by the raycast");
                 }
             }
-
-            // Handling pause menu toggling
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (GameManager.UIPanels.Count != 0) KillLastUIPanel();
                 else TogglePauseMenu();
             }
         }
+    }
+    private void DisplayShipUI(GameObject hitObject)
+    {
+
+    }
+    private void DisplayPlanetUI(GameObject hitObject)
+    {
+
+    }
+    private void DisplayStationUI(GameObject hitObject)
+    {
+
     }
     public void TogglePauseMenu()
     {

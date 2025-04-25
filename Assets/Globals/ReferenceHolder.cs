@@ -8,14 +8,23 @@ namespace Assets
         public Camera MainCamera;
         public Camera SectorCamera;
         public Canvas MainCanvas;
+
         public GameObject StarPrefab;
         public GameObject PauseMenu;
         public GameObject UIPrefab;
+        public GameObject CanvasTopSide;
+
+        public GameObject ShipUI;
+        public GameObject PlanetUI;
+        public GameObject StationUI;
+
+        public static GameObject[] Resources = new GameObject[5];
 
         public Material planetMaterial;
         public Material starMaterial;
         public Material sectorMaterial;
         public Material atmosphereMaterial;
+        public Material shipMaterial;
         public ReferenceHolder()
         {
 
@@ -43,7 +52,7 @@ namespace Assets
             SceneManager.sceneLoaded += OnSceneLoaded;
             if (_instance == null) _instance = this;
             else if (_instance != this) Destroy(gameObject);
-
+            CanvasTopSide = GameObject.Find("TopSide");
         }
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -55,7 +64,14 @@ namespace Assets
             }
             else
             {
-
+                Resources = new GameObject[]
+                {
+                    CanvasTopSide.gameObject.transform.GetChild(2).gameObject,
+                    CanvasTopSide.gameObject.transform.GetChild(3).gameObject,
+                    CanvasTopSide.gameObject.transform.GetChild(4).gameObject,
+                    CanvasTopSide.gameObject.transform.GetChild(5).gameObject,
+                    CanvasTopSide.gameObject.transform.GetChild(6).gameObject,
+                };
             }
         }
         private void OnDestroy()

@@ -1,3 +1,4 @@
+using Assets;
 using Dummiesman;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ public class ShipHandler : MonoBehaviour
     public static GameObject shipPrefab;
     private void Awake()
     {
-        shipPrefab = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, "Ships/ship.obj"));
+        shipPrefab = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, "Ships/stealth.obj"));
         shipPrefab.SetActive(false);
     }
     public static void SetShipTarget(Vector3 destinition)
@@ -62,9 +63,21 @@ public class ShipHandler : MonoBehaviour
     {
         GameObject ship = Instantiate(shipPrefab, position, Quaternion.identity);
         ship.name = $"Ship - {civilizationID}";
-        ship.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        ship.transform.localScale = new Vector3(1, 1, 1);
         ship.layer = 6;
+
+        MeshRenderer[] meshRenderers = ship.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            renderer.materials = new Material[] {
+                new (ReferenceHolder.Instance.shipMaterial),
+                new (ReferenceHolder.Instance.shipMaterial),
+                new (ReferenceHolder.Instance.shipMaterial),
+                new (ReferenceHolder.Instance.shipMaterial),
+            };
+        }
         ship.SetActive(true);
+        ScaleMesh(ship, 0.00025f);
         return ship;
     }
     public static void SpawnShip(Vector3 position, byte civilizationID)
@@ -89,5 +102,25 @@ public class ShipHandler : MonoBehaviour
             navMeshAgent.speed = 1f;
             battleships.Add(shipComponent);
         }
+    }
+    // Scales the mesh of the ship to the given scale factor
+    // Needed because the OBJ loader loads the scale of the original object
+    // Resulting in the model being crazy huge, like 10-40.000 times bigger than it should be
+    public static void ScaleMesh(GameObject obj, float scaleFactor)
+    {
+        MeshFilter[] filters = obj.GetComponentsInChildren<MeshFilter>();
+        foreach (MeshFilter filter in filters)
+        {
+            Mesh mesh = filter.mesh;
+            Vector3[] verts = mesh.vertices;
+            for (int i = 0; i < verts.Length; i++) verts[i] *= scaleFactor;
+            mesh.vertices = verts;
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+        }
+    }
+    public static void LoadShip()
+    {
+
     }
 }

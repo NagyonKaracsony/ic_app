@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 [CreateAssetMenu()]
 [System.Serializable]
-public class ShapeSettings : ScriptableObject {
+public class ShapeSettings : ScriptableObject
+{
     public float planetRadius = 1;
     public NoiseLayer[] noiseLayers;
     [System.Serializable]
