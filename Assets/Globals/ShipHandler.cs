@@ -13,9 +13,9 @@ public class ShipHandler : MonoBehaviour
         shipPrefab = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, "Ships/stealth.obj"));
         shipPrefab.SetActive(false);
     }
-    public static void SetShipTarget(Vector3 destinition)
+    public static void SetShipTarget(Vector3 destination)
     {
-        foreach (var battleship in battleships) battleship.GetComponent<NavMeshAgent>().SetDestination(destinition);
+        foreach (var battleship in battleships) battleship.GetComponent<NavMeshAgent>().SetDestination(destination);
     }
     public static void HandleCombatTick()
     {
