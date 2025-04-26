@@ -26,8 +26,8 @@ public class StarSystem : MonoBehaviour
         yield return new WaitForEndOfFrame();
         gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
 
-        ShipHandler.SpawnShip(new Vector3(10, 0, 20), 0, 255);
-        ShipHandler.SpawnShip(new Vector3(10, 0, 30), 1, 255);
+        ShipHandler.SpawnShip(new Vector3(10, 0, 20), 0, 5);
+        ShipHandler.SpawnShip(new Vector3(10, 0, 30), 1, 5);
         ShipHandler.SetShipTarget(new Vector3(20, 0, 20));
     }
     private StarSystem LoadStarSystemFromSave(string saveId)
