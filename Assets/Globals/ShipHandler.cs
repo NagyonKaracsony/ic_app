@@ -1,8 +1,6 @@
 using Assets;
-using Dummiesman;
 using Ship;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 public class ShipHandler : MonoBehaviour
@@ -14,8 +12,7 @@ public class ShipHandler : MonoBehaviour
     {
         ShipRange = Resources.Load<GameObject>("Prefabs/Ships/Range");
         ShipRange.SetActive(false);
-        shipPrefab = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, "Ships/stealth.obj"));
-        shipPrefab.SetActive(false);
+        shipPrefab = ReferenceHolder.Instance.StealthShipModel;
     }
     public static void SetShipTarget(Vector3 destination)
     {
@@ -63,20 +60,7 @@ public class ShipHandler : MonoBehaviour
     {
         GameObject ship = Instantiate(shipPrefab, position, Quaternion.identity);
         ship.name = $"Ship - {civilizationID}";
-        ship.transform.localScale = new Vector3(1, 1, 1);
         ship.layer = 6;
-
-        MeshRenderer[] meshRenderers = ship.GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer renderer in meshRenderers)
-        {
-            renderer.materials = new Material[] {
-                new (ReferenceHolder.Instance.shipMaterial),
-                new (ReferenceHolder.Instance.shipMaterial),
-                new (ReferenceHolder.Instance.shipMaterial),
-                new (ReferenceHolder.Instance.shipMaterial),
-            };
-            renderer.gameObject.transform.localPosition = new Vector3(0, 0, 0.2f);
-        }
         ship.SetActive(true);
         ScaleMesh(ship, 0.00025f);
         return ship;

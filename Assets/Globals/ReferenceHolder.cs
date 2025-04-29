@@ -18,6 +18,9 @@ namespace Assets
         public GameObject PlanetUI;
         public GameObject StationUI;
 
+        public GameObject StealthShipModel;
+        public GameObject InterceptorShipModel;
+
         public static GameObject[] Resources = new GameObject[5];
 
         public Material planetMaterial;

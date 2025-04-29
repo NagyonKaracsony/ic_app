@@ -1,9 +1,6 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Ship;
 using System;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 [Serializable]
@@ -26,99 +23,82 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
     [SerializeField] private Battleship target;
     [SerializeField] private GameObject shipRange;
 
-    // --- Interface property implementations ---
-
     public int ColliderHits
     {
         get => colliderHits;
         set => colliderHits = (byte)value;
     }
-
     public float Range
     {
         get => range;
         set => range = value;
     }
-
     public GameObject ShipRange
     {
         get => shipRange;
         set => shipRange = value;
     }
-
     public Battleship? Target
     {
         get => target;
         set => target = value;
     }
-
     public string Name
     {
         get => name;
         set => name = value;
     }
-
     public ShipType Type
     {
         get => type;
         set => type = value;
     }
-
     public int HullHealthPoints
     {
         get => hullHealthPoints;
         set => hullHealthPoints = value;
     }
-
     public int ShieldHealthPoints
     {
         get => shieldHealthPoints;
         set => shieldHealthPoints = value;
     }
-
     public int Damage
     {
         get => damage;
         set => damage = value;
     }
-
     public float Speed
     {
         get => speed;
         set => speed = value;
     }
-
     public NavMeshAgent NavMeshAgent
     {
         get => navMeshAgent;
         set => navMeshAgent = value;
     }
-
     public Collider[] Colliders
     {
         get => colliders;
         set => colliders = value;
     }
-
     public Vector3? CurrentDestination
     {
         get => currentDestination;
         set => currentDestination = value;
     }
-
     public Queue<Vector3> DestinationQueue
     {
         get => destinationQueue;
         set => destinationQueue = value;
     }
-
-    public event Action OnDestinationReached;
-
     public byte ownerID
     {
         get => ownerId;
         set => ownerId = value;
     }
+    public event Action OnDestinationReached;
     public void OnDestroy()
     {
         ShipHandler.battleships.Remove(this);

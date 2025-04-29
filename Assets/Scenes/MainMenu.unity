@@ -161,6 +161,11 @@ MonoBehaviour:
   UIPrefab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
     type: 3}
   CanvasTopSide: {fileID: 0}
+  ShipUI: {fileID: 0}
+  PlanetUI: {fileID: 0}
+  StationUI: {fileID: 0}
+  StealthShipModel: {fileID: 0}
+  InterceptorShipModel: {fileID: 0}
   planetMaterial: {fileID: -876546973899608171, guid: 036a329c72f10f849a7b831363f721a2,
     type: 3}
   starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
@@ -169,6 +174,7 @@ MonoBehaviour:
     type: 3}
   atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
     type: 3}
+  shipMaterial: {fileID: 0}
 --- !u!4 &23425379
 Transform:
   m_ObjectHideFlags: 0
