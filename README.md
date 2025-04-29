@@ -19,9 +19,9 @@ The website part of the project can be found on github, [here](https://github.co
 > | :---        |    :----:                   |                       :----: |
 > | OS          | **64 bit Windows 10 or 11** | **64 bit Windows 10 or 11**  |
 > | CPU         | **TBD**                     | **TBD**                      |
-> | MEMORY      | **8 GB**                    | **16 GB**                    |
+> | MEMORY      | **4 GB**                    | **8 GB**                    |
 > | GPU         | **TBD**                     | **TBD**                      |
-> | STORAGE     | **5 GB**                    | **5 GB**                     |
+> | STORAGE     | **2 GB**                    | **4 GB**                     |
 > 
 
 # License
