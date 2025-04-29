@@ -1,4 +1,6 @@
 using Assets;
+using Assets.Globals;
+using Newtonsoft.Json.Linq;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,8 +9,8 @@ public class InputHandler : MonoBehaviour
     public static bool pauseMenuState = false;
     public static bool isNestedInPauseMenu = false;
     public static bool isInMainMenu = true;
-    public static GameObject previousSelectedObject;
-    public static GameObject currentSelectedObject;
+    public static GameObject previousSelectedObject = null;
+    public static GameObject currentSelectedObject = null;
     void Update()
     {
         if (!isInMainMenu)
@@ -25,7 +27,7 @@ public class InputHandler : MonoBehaviour
 
                 // Handling camera cycling
                 if (Input.GetKeyDown(KeyCode.M)) transform.gameObject.GetComponent<CameraController>().CycleCamera();
-
+                if (Input.GetKeyDown(KeyCode.Z)) GlobalUtility.SaveGame();
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector3 mousePosition = Input.mousePosition;
@@ -33,9 +35,19 @@ public class InputHandler : MonoBehaviour
                     {
                         GameObject hitObject = raycastHit.transform.gameObject;
                         int targetLayer = hitObject.layer;
+
+                        previousSelectedObject = currentSelectedObject;
+                        currentSelectedObject = raycastHit.transform.gameObject;
+
+                        if (previousSelectedObject != null)
+                        {
+                            if (currentSelectedObject.GetHashCode() == previousSelectedObject.GetHashCode()) return;
+                        }
+
                         switch (targetLayer)
                         {
                             case 6: // Ships
+                                currentSelectedObject.GetComponent<Battleship>().ShowRange();
                                 DisplayShipUI(hitObject);
                                 break;
                             case 7: // Planets
@@ -45,19 +57,25 @@ public class InputHandler : MonoBehaviour
                                 DisplayStationUI(hitObject);
                                 break;
                             case 10: // Sectors
-                                if (currentSelectedObject.GetComponent<Battleship>() != null)
+                                if (previousSelectedObject != null)
                                 {
-                                    if (currentSelectedObject.GetComponent<Battleship>().ownerID == 0)
+                                    if (previousSelectedObject.layer == 6)
                                     {
-                                        Vector3 temp = raycastHit.point;
-                                        temp.y = 0f;
-                                        currentSelectedObject.GetComponent<NavMeshAgent>().SetDestination(temp);
+                                        Battleship battleship = previousSelectedObject.GetComponent<Battleship>();
+                                        if (battleship.ownerID == 0)
+                                        {
+                                            Vector3 temp = raycastHit.point;
+                                            temp.y = 0f;
+                                            battleship.GetComponent<NavMeshAgent>().SetDestination(temp);
+                                        }
                                     }
                                 }
                                 break;
                         }
-                        previousSelectedObject = currentSelectedObject;
-                        currentSelectedObject = raycastHit.transform.gameObject;
+                        if (previousSelectedObject != null)
+                        {
+                            if (previousSelectedObject.layer == 6) previousSelectedObject.GetComponent<Battleship>().HideRange();
+                        }
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+[Serializable]
 public enum ShipType
 {
     Battleship
@@ -15,8 +16,8 @@ public interface IShip
     public float Speed { get; set; }
     public NavMeshAgent NavMeshAgent { get; set; }
     public Collider[] Colliders { get; set; }
-    public Vector3? currentDestination { get; set; }
-    public Queue<Vector3> destinationQueue { get; set; }
+    public Vector3? CurrentDestination { get; set; }
+    public Queue<Vector3> DestinationQueue { get; set; }
     public event Action OnDestinationReached;
     public void SetDestination(Vector3 destination);
     public void RemoveLastQueuedDestination();

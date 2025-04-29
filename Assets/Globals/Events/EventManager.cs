@@ -8,16 +8,13 @@ public class EventManager : MonoBehaviour
     {
         if (!EventDatabase.Events.TryGetValue(eventId, out currentEvent))
         {
-            Debug.LogError("Event not found: " + eventId);
             return;
         }
-
         ShowEventUI(currentEvent);
     }
     public void ChooseOption(EventOption option)
     {
         ApplyEffects(option.effects);
-
         if (!string.IsNullOrEmpty(option.nextEvent)) TriggerEvent(option.nextEvent);
         else HideEventUI();
     }
@@ -48,7 +45,7 @@ public class EventManager : MonoBehaviour
     }
     private void ShowEventUI(GameEvent e)
     {
-        foreach (var opt in e.options) if (CheckConditions(opt.conditions)) Debug.Log($"→ {opt.text}");
+        foreach (var opt in e.options) if (CheckConditions(opt.conditions)) ;
     }
     private bool CheckConditions(List<Condition> conditions)
     {

@@ -1,5 +1,6 @@
 using Assets;
 using Dummiesman;
+using Ship;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,8 +9,11 @@ public class ShipHandler : MonoBehaviour
 {
     public static List<Battleship> battleships = new List<Battleship>();
     public static GameObject shipPrefab;
+    public static GameObject ShipRange;
     private void Awake()
     {
+        ShipRange = Resources.Load<GameObject>("Prefabs/Ships/Range");
+        ShipRange.SetActive(false);
         shipPrefab = new OBJLoader().Load(Path.Combine(Application.streamingAssetsPath, "Ships/stealth.obj"));
         shipPrefab.SetActive(false);
     }
@@ -19,7 +23,6 @@ public class ShipHandler : MonoBehaviour
     }
     public static void HandleCombatTick()
     {
-        // a tad bit wasteful, but it should work
         for (int i = 0; i < battleships.Count; i++)
         {
             Battleship battleship = battleships[i];
@@ -30,7 +33,7 @@ public class ShipHandler : MonoBehaviour
                 if (battleship.ColliderHits != 0)
                 {
                     List<Battleship> targets = new();
-                    int colliderHits = battleship.ColliderHits; // saves a few cycles  
+                    int colliderHits = battleship.ColliderHits;
                     for (int y = 0; y < colliderHits; y++)
                     {
                         if (battleship.Colliders[y].gameObject.layer == 6)
@@ -41,12 +44,9 @@ public class ShipHandler : MonoBehaviour
                     }
                     Battleship closestTarget = null;
                     float closestSqrDistance = float.MaxValue;
-                    int targetsCount = targets.Count; // saves a few cycles
+                    int targetsCount = targets.Count;
                     for (int y = 0; y < targetsCount; y++)
                     {
-                        // this is also to prevent the battleship from seeing itself
-                        // OverlapSphereNonAlloc also returns the collider of the battleship itself
-                        // not sure if this is just a quirk of unity or if this is a bug
                         float sqrDist = (targets[y].transform.position - battleship.transform.position).sqrMagnitude;
                         if (sqrDist < closestSqrDistance)
                         {
@@ -75,6 +75,7 @@ public class ShipHandler : MonoBehaviour
                 new (ReferenceHolder.Instance.shipMaterial),
                 new (ReferenceHolder.Instance.shipMaterial),
             };
+            renderer.gameObject.transform.localPosition = new Vector3(0, 0, 0.2f);
         }
         ship.SetActive(true);
         ScaleMesh(ship, 0.00025f);
@@ -103,6 +104,27 @@ public class ShipHandler : MonoBehaviour
             battleships.Add(shipComponent);
         }
     }
+    public static void SpawnShip(ShipData shipData)
+    {
+        Vector3 currentPosition = new Vector3(shipData.currentPosition[0], shipData.currentPosition[1], shipData.currentPosition[2]);
+        byte civilizationID = shipData.ownerID;
+        GameObject ship = CreateShipInstance(currentPosition, civilizationID);
+        Battleship shipComponent = ship.AddComponent<Battleship>();
+
+        shipComponent.name = shipData.Name;
+        shipComponent.Type = shipData.Type;
+        shipComponent.HullHealthPoints = shipData.HullHealthPoints;
+        shipComponent.ShieldHealthPoints = shipData.ShieldHealthPoints;
+        shipComponent.Damage = shipData.Damage;
+        shipComponent.Range = shipData.Range;
+
+        SphereCollider colliderComponent = ship.AddComponent<SphereCollider>();
+        NavMeshAgent navMeshAgent = ship.AddComponent<NavMeshAgent>();
+        shipComponent.ownerID = civilizationID;
+        navMeshAgent.speed = 1f;
+        battleships.Add(shipComponent);
+    }
+
     // Scales the mesh of the ship to the given scale factor
     // Needed because the OBJ loader loads the scale of the original object
     // Resulting in the model being crazy huge, like 10-40.000 times bigger than it should be
@@ -118,9 +140,5 @@ public class ShipHandler : MonoBehaviour
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
         }
-    }
-    public static void LoadShip()
-    {
-
     }
 }

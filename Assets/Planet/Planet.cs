@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 public class Planet : MonoBehaviour
 {
@@ -87,10 +86,14 @@ public class Planet : MonoBehaviour
         colorGenerator.UpdateColors();
         for (int i = 0; i < 6; i++) if (meshFilters[i].gameObject.activeSelf) terrainFaces[i].UpdateUVs(colorGenerator);
     }
+    public PlanetData Save()
+    {
+        return new PlanetData(this);
+    }
     public void SaveTo(string filePath)
     {
         PlanetData planetData = new(this);
-        JObject json = JObject.Parse(JsonUtility.ToJson(planetData, true));
+        JObject json = JObject.Parse(JsonUtility.ToJson(planetData, false));
         foreach (var property in json.Properties())
         {
             if (property.Value.Type == JTokenType.String && property.Value.ToString().Trim().StartsWith("{"))
@@ -131,9 +134,7 @@ public class Planet : MonoBehaviour
         atmosphere.transform.parent = planet.transform;
         atmosphere.transform.position = new Vector3(0, 0, 0);
         atmosphere.GetComponent<MeshRenderer>().material = new(ReferenceHolder.Instance.atmosphereMaterial);
-
         atmosphere.transform.localScale = new Vector3(2.05f, 2.05f, 2.05f);
-
         planetComponent.GeneratePlanet();
         return planet;
     }

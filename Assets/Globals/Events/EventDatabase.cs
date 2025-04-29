@@ -9,7 +9,6 @@ public class EventDatabase : MonoBehaviour
     {
         string json = File.ReadAllText(Path.Combine(Application.streamingAssetsPath + "\\Events\\Events.json"));
         List<GameEvent> loadedEvents = JsonUtility.FromJson<Wrapper>(WrapArray(json)).events;
-
         foreach (var e in loadedEvents) Events[e.id] = e;
     }
     [System.Serializable]

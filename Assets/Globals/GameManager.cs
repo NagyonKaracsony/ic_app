@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static Civilization playerCivilization;
     public static List<GameObject> UIPanels = new();
+    public static List<GameObject> planets = new();
     public static GameManager Instance
     {
         get

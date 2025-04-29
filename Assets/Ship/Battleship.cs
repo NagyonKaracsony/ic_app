@@ -1,32 +1,131 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Ship;
 using System;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
+[Serializable]
 public class Battleship : MonoBehaviour, IShip, IBattleship
 {
-    public string Name { get; set; }
-    public ShipType Type { get; set; }
-    public int HullHealthPoints { get; set; } = 5000;
-    public int ShieldHealthPoints { get; set; } = 2000;
-    public int Damage { get; set; } = 350;
-#nullable enable
-    public Battleship? Target { get; set; } = null;
-#nullable disable
-    public float Speed { get; set; } = 0.75f;
-    public Vector3? currentDestination { get; set; }
-    public Queue<Vector3> destinationQueue { get; set; } = new Queue<Vector3>();
+    [SerializeField] private new string name = "Battleship";
+    [SerializeField] private ShipType type;
+    [SerializeField] private int hullHealthPoints = 5000;
+    [SerializeField] private int shieldHealthPoints = 2000;
+    [SerializeField] private int damage = 350;
+    [SerializeField] private float range = 10;
+    [SerializeField] private float speed = 0.75f;
+    [SerializeField] private Vector3? currentDestination = null;
+    [SerializeField] private Queue<Vector3> destinationQueue = new Queue<Vector3>();
+    [SerializeField] private Collider[] colliders = new Collider[255];
+    [SerializeField] private byte colliderHits = 0;
+    [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private byte ownerId = 0;
+
+    [SerializeField] private Battleship target;
+    [SerializeField] private GameObject shipRange;
+
+    // --- Interface property implementations ---
+
+    public int ColliderHits
+    {
+        get => colliderHits;
+        set => colliderHits = (byte)value;
+    }
+
+    public float Range
+    {
+        get => range;
+        set => range = value;
+    }
+
+    public GameObject ShipRange
+    {
+        get => shipRange;
+        set => shipRange = value;
+    }
+
+    public Battleship? Target
+    {
+        get => target;
+        set => target = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public ShipType Type
+    {
+        get => type;
+        set => type = value;
+    }
+
+    public int HullHealthPoints
+    {
+        get => hullHealthPoints;
+        set => hullHealthPoints = value;
+    }
+
+    public int ShieldHealthPoints
+    {
+        get => shieldHealthPoints;
+        set => shieldHealthPoints = value;
+    }
+
+    public int Damage
+    {
+        get => damage;
+        set => damage = value;
+    }
+
+    public float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+
+    public NavMeshAgent NavMeshAgent
+    {
+        get => navMeshAgent;
+        set => navMeshAgent = value;
+    }
+
+    public Collider[] Colliders
+    {
+        get => colliders;
+        set => colliders = value;
+    }
+
+    public Vector3? CurrentDestination
+    {
+        get => currentDestination;
+        set => currentDestination = value;
+    }
+
+    public Queue<Vector3> DestinationQueue
+    {
+        get => destinationQueue;
+        set => destinationQueue = value;
+    }
+
     public event Action OnDestinationReached;
-    public Collider[] Colliders { get; set; } = new Collider[255];
-    public byte ColliderHits { get; set; } = 0;
-    public NavMeshAgent NavMeshAgent { get; set; } = new NavMeshAgent();
-    public byte ownerID { get; set; } = 0;
+
+    public byte ownerID
+    {
+        get => ownerId;
+        set => ownerId = value;
+    }
     public void OnDestroy()
     {
         ShipHandler.battleships.Remove(this);
     }
     public void UpdateColliders()
     {
-        ColliderHits = (byte)Physics.OverlapSphereNonAlloc(transform.position, 1f, Colliders);
+        colliderHits = (byte)Physics.OverlapSphereNonAlloc(transform.position, 1f, Colliders);
     }
     public void SetTarget(Battleship target)
     {
@@ -69,6 +168,24 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
     {
         ShipHandler.battleships.Remove(this);
         Destroy(gameObject);
+    }
+    public ShipData Save()
+    {
+        return new ShipData(this);
+    }
+    public void ShowRange()
+    {
+        Vector3 temp = transform.position;
+        temp.y = transform.position.y + 0.025f;
+        shipRange = Instantiate(ShipHandler.ShipRange, temp, Quaternion.identity);
+        shipRange.transform.parent = transform;
+        shipRange.transform.localScale = new Vector3(range, 0.1f, range);
+        shipRange.SetActive(true);
+    }
+    public void HideRange()
+    {
+        Destroy(shipRange);
+        shipRange = null;
     }
     public void SetDestination(Vector3 destination)
     {

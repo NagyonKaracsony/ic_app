@@ -45,6 +45,7 @@ public class SystemSectors : MonoBehaviour
         {
             GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}");
             planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
+            GameManager.planets.Add(planet);
 
             NavMeshObstacle navMeshObstacleComponent = planet.AddComponent<NavMeshObstacle>();
             navMeshObstacleComponent.shape = NavMeshObstacleShape.Capsule;

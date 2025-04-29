@@ -10,11 +10,11 @@ public class PlanetData
     {
         Material planetMaterial = new Material(planet.colorSettings.planetMaterial);
         resolution = planet.resolution;
-        shapeSettings = JsonUtility.ToJson(planet.shapeSettings, true);
+        shapeSettings = JsonUtility.ToJson(planet.shapeSettings, false);
         ColorSettings deMaterializedColorSettings = planet.colorSettings;
         deMaterializedColorSettings.planetMaterial = null;
-        colorSettings = JsonUtility.ToJson(deMaterializedColorSettings, true);
+        colorSettings = JsonUtility.ToJson(deMaterializedColorSettings, false);
         planet.colorSettings.planetMaterial = planetMaterial;
-        planetProperties = JsonUtility.ToJson(planet.planetProperties, true);
+        planetProperties = JsonUtility.ToJson(planet.planetProperties, false);
     }
 }
