@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class ShipHandler : MonoBehaviour
 {
-    public static List<Battleship> battleships = new List<Battleship>();
+    public static List<Battleship> battleships = new();
     public static GameObject shipPrefab;
     public static GameObject ShipRange;
     private void Awake()
@@ -62,7 +62,7 @@ public class ShipHandler : MonoBehaviour
         ship.name = $"Ship - {civilizationID}";
         ship.layer = 6;
         ship.SetActive(true);
-        ScaleMesh(ship, 0.00025f);
+        ScaleMesh(ship, 0.00015f);
         return ship;
     }
     public static void SpawnShip(Vector3 position, byte civilizationID)
@@ -83,6 +83,8 @@ public class ShipHandler : MonoBehaviour
             Battleship shipComponent = ship.AddComponent<Battleship>();
             SphereCollider colliderComponent = ship.AddComponent<SphereCollider>();
             NavMeshAgent navMeshAgent = ship.AddComponent<NavMeshAgent>();
+
+            colliderComponent.radius = 1f;
             shipComponent.ownerID = civilizationID;
             navMeshAgent.speed = 1f;
             battleships.Add(shipComponent);
@@ -90,7 +92,7 @@ public class ShipHandler : MonoBehaviour
     }
     public static void SpawnShip(ShipData shipData)
     {
-        Vector3 currentPosition = new Vector3(shipData.currentPosition[0], shipData.currentPosition[1], shipData.currentPosition[2]);
+        Vector3 currentPosition = new(shipData.currentPosition[0], shipData.currentPosition[1], shipData.currentPosition[2]);
         byte civilizationID = shipData.ownerID;
         GameObject ship = CreateShipInstance(currentPosition, civilizationID);
         Battleship shipComponent = ship.AddComponent<Battleship>();
@@ -105,7 +107,6 @@ public class ShipHandler : MonoBehaviour
         SphereCollider colliderComponent = ship.AddComponent<SphereCollider>();
         NavMeshAgent navMeshAgent = ship.AddComponent<NavMeshAgent>();
         shipComponent.ownerID = civilizationID;
-        navMeshAgent.speed = 1f;
         battleships.Add(shipComponent);
     }
 

@@ -16,8 +16,6 @@ public class Planet : MonoBehaviour
     public ColorSettings colorSettings;
     public PlanetProperties planetProperties;
 
-    public string saveTemplateAs;
-
     [HideInInspector]
     public bool shapeSettingsFoldout;
     [HideInInspector]
@@ -42,11 +40,11 @@ public class Planet : MonoBehaviour
         {
             if (meshFilters[i] == null)
             {
-                GameObject meshObj = new GameObject("mesh");
+                GameObject meshObj = new("mesh");
                 meshObj.transform.parent = transform;
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
-                meshFilters[i].sharedMesh = new Mesh();
+                meshFilters[i].sharedMesh = new();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
@@ -120,7 +118,7 @@ public class Planet : MonoBehaviour
 
         planetComponent.shapeSettings = JsonConvert.DeserializeObject<ShapeSettings>(jsonObject["shapeSettings"].ToString());
         planetComponent.colorSettings = JsonConvert.DeserializeObject<ColorSettings>(jsonObject["colorSettings"].ToString());
-        planetComponent.colorSettings.planetMaterial = new Material(ReferenceHolder.Instance.planetMaterial);
+        planetComponent.colorSettings.planetMaterial = new(ReferenceHolder.Instance.planetMaterial);
 
         planetComponent.colorSettings.oceanColor = DeserializeGradient((JObject)jsonObject["colorSettings"]["oceanColor"], 0.3f);
         var landColorData = (JObject)jsonObject["colorSettings"]["biomeColorSettings"];
@@ -132,9 +130,9 @@ public class Planet : MonoBehaviour
 
         GameObject atmosphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         atmosphere.transform.parent = planet.transform;
-        atmosphere.transform.position = new Vector3(0, 0, 0);
+        atmosphere.transform.position = new(0, 0, 0);
         atmosphere.GetComponent<MeshRenderer>().material = new(ReferenceHolder.Instance.atmosphereMaterial);
-        atmosphere.transform.localScale = new Vector3(2.05f, 2.05f, 2.05f);
+        atmosphere.transform.localScale = new(2.05f, 2.05f, 2.05f);
         planetComponent.GeneratePlanet();
         return planet;
     }
@@ -155,9 +153,9 @@ public class Planet : MonoBehaviour
                 ),
                 gradientData[$"ctime{i}"].Value<int>() / 65535f
             );
-            alphas[i] = new GradientAlphaKey(1.0f, 1.0f);
+            alphas[i] = new(1.0f, 1.0f);
         }
-        var gradient = new Gradient();
+        Gradient gradient = new();
         gradient.SetKeys(colors, alphas);
         return gradient;
     }

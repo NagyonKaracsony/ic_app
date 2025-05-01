@@ -30,12 +30,4 @@ public class StarSystem : MonoBehaviour
         ShipHandler.SpawnShip(new Vector3(10, 0, 30), 1, 5);
         ShipHandler.SetShipTarget(new Vector3(20, 0, 20));
     }
-    private StarSystem LoadStarSystemFromSave(string saveId)
-    {
-        return null;
-    }
-    private StarSystem CreateSystem()
-    {
-        return null;
-    }
 }

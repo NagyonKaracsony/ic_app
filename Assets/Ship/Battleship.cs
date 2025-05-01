@@ -14,7 +14,7 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
     [SerializeField] private float range = 10;
     [SerializeField] private float speed = 0.75f;
     [SerializeField] private Vector3? currentDestination = null;
-    [SerializeField] private Queue<Vector3> destinationQueue = new Queue<Vector3>();
+    [SerializeField] private Queue<Vector3> destinationQueue = new();
     [SerializeField] private Collider[] colliders = new Collider[255];
     [SerializeField] private byte colliderHits = 0;
     [SerializeField] private NavMeshAgent navMeshAgent;
@@ -22,7 +22,6 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
 
     [SerializeField] private Battleship target;
     [SerializeField] private GameObject shipRange;
-
     public int ColliderHits
     {
         get => colliderHits;
@@ -105,7 +104,7 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
     }
     public void UpdateColliders()
     {
-        colliderHits = (byte)Physics.OverlapSphereNonAlloc(transform.position, 1f, Colliders);
+        colliderHits = (byte)Physics.OverlapSphereNonAlloc(transform.position, Range / 2f, Colliders);
     }
     public void SetTarget(Battleship target)
     {
@@ -128,7 +127,6 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
             Target.ShieldHealthPoints -= DamageToDeal;
             DamageToDeal = 0;
         }
-
         if (DamageToDeal > 0)
         {
             if (Target.HullHealthPoints <= DamageToDeal)
@@ -194,7 +192,6 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
         {
             currentDestination = null;
             OnDestinationReached?.Invoke();
-
             if (destinationQueue.Count > 0) SetDestination(destinationQueue.Dequeue());
         }
     }

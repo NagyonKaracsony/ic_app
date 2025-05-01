@@ -22,7 +22,7 @@ namespace Assets.Globals
             ShipData[] savedShips = new ShipData[ships.Count];
             for (int i = 0; i < ships.Count; i++) savedShips[i] = ships[i].GetComponent<Battleship>().Save();
 
-            Save save = new Save(savedPlanets, savedShips);
+            Save save = new(savedPlanets, savedShips);
             JObject json = JObject.Parse(JsonUtility.ToJson(save, true));
             FixJsonStrings(json);
 

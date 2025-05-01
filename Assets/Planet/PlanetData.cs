@@ -8,7 +8,7 @@ public class PlanetData
     public string planetProperties;
     public PlanetData(Planet planet)
     {
-        Material planetMaterial = new Material(planet.colorSettings.planetMaterial);
+        Material planetMaterial = new(planet.colorSettings.planetMaterial);
         resolution = planet.resolution;
         shapeSettings = JsonUtility.ToJson(planet.shapeSettings, false);
         ColorSettings deMaterializedColorSettings = planet.colorSettings;
