@@ -27,6 +27,12 @@ public class InputHandler : MonoBehaviour
                 // Handling camera cycling
                 if (Input.GetKeyDown(KeyCode.M)) transform.gameObject.GetComponent<CameraController>().CycleCamera();
                 if (Input.GetKeyDown(KeyCode.Z)) GlobalUtility.SaveGame();
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    ShipHandler.SpawnShip(new Vector3(10, 0, 20), 0, 5);
+                    ShipHandler.SpawnShip(new Vector3(10, 0, 30), 1, 5);
+                    ShipHandler.SetShipTarget(new Vector3(20, 0, 20));
+                }
                 if (Input.GetMouseButtonDown(0))
                 {
                     Vector3 mousePosition = Input.mousePosition;

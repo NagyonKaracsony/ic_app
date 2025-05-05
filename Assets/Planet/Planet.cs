@@ -47,7 +47,7 @@ public class Planet : MonoBehaviour
                 meshFilters[i].sharedMesh = new();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
+            terrainFaces[i] = new(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
             bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
             meshFilters[i].gameObject.SetActive(renderFace);
         }
@@ -86,7 +86,7 @@ public class Planet : MonoBehaviour
     }
     public PlanetData Save()
     {
-        return new PlanetData(this);
+        return new(this);
     }
     public void SaveTo(string filePath)
     {

@@ -10,9 +10,14 @@ namespace Assets.Globals
 {
     public static class GlobalUtility
     {
+        public static string GameFolder => Path.Combine(Application.persistentDataPath);
+        public static string SaveFolder => Path.Combine(GameFolder, "Saves");
+
         public static string saveData = string.Empty;
         public static void SaveGame()
         {
+            if (!Directory.Exists(SaveFolder)) Directory.CreateDirectory(SaveFolder);
+
             List<GameObject> planets = GameManager.planets;
             List<Battleship> ships = ShipHandler.battleships;
 
@@ -22,13 +27,11 @@ namespace Assets.Globals
             ShipData[] savedShips = new ShipData[ships.Count];
             for (int i = 0; i < ships.Count; i++) savedShips[i] = ships[i].GetComponent<Battleship>().Save();
 
-            Save save = new(savedPlanets, savedShips);
+            Save save = new Save(savedPlanets, savedShips);
             JObject json = JObject.Parse(JsonUtility.ToJson(save, true));
             FixJsonStrings(json);
 
-            string path = Path.Combine(Application.persistentDataPath, "Saves");
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-            File.WriteAllText(path + $"/{save.SaveID}.json", json.ToString(Formatting.None));
+            File.WriteAllText(SaveFolder + $"/{save.SaveID}.json", json.ToString(Formatting.None));
         }
         public static void FixJsonStrings(JToken token)
         {

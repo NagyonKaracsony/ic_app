@@ -34,14 +34,11 @@ namespace Ship
             Damage = ship.Damage;
             Range = ship.Range;
             Speed = ship.Speed;
-            Queue<Vector3> queue = new();
-            queue.Enqueue(new(1.23f, 2.34f, 3.45f));
-            queue.Enqueue(new(4.56f, 5.67f, 6.78f));
             currentPosition = SerializableVector3Row.Vector3NullableToArray(ship.transform.position);
-            currentDestination = SerializableVector3Row.Vector3NullableToArray(queue.First());
-            destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(queue);
+            currentDestination = SerializableVector3Row.Vector3NullableToArray(ship.DestinationQueue.First());
+            destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(ship.DestinationQueue);
             ownerID = ship.ownerID;
-            DestinationMatrixWrapper wrapper = new() { destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(queue) };
+            DestinationMatrixWrapper wrapper = new() { destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(ship.DestinationQueue) };
         }
     }
     [System.Serializable]

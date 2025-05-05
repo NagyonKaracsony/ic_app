@@ -1,4 +1,3 @@
-using Assets;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -8,7 +7,7 @@ public class SystemSectors : MonoBehaviour
     private int hexagonRadius = 10; // Radius of each hexagon
     private int hexagonGridRadius = 6; // Radius of the hexagonal grid (number of rings)
     private Material hexagonMaterial;
-    private Dictionary<Vector2Int, GameObject> hexagonDictionary = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<Vector2Int, GameObject> hexagonDictionary = new();
     public void CreateNew(Material sectorMaterial, int size)
     {
         hexagonMaterial = sectorMaterial;
@@ -31,7 +30,7 @@ public class SystemSectors : MonoBehaviour
     }
     private void CreateSector(Vector3 position, Vector2Int axialCoords)
     {
-        GameObject sector = new GameObject($"Sector ({axialCoords.x}, {axialCoords.y})");
+        GameObject sector = new($"Sector ({axialCoords.x}, {axialCoords.y})");
         sector.layer = 10;
         sector.transform.position = position;
         sector.transform.parent = transform;
@@ -63,7 +62,7 @@ public class SystemSectors : MonoBehaviour
     private Vector3 ChoseOffset()
     {
         int offsetter = Random.Range(2, 5);
-        return new Vector3(Random.Range(0, 2) <= 0 ? offsetter : -offsetter, 0, Random.Range(0, 2) <= 0 ? offsetter : -offsetter);
+        return new(Random.Range(0, 2) <= 0 ? offsetter : -offsetter, 0, Random.Range(0, 2) <= 0 ? offsetter : -offsetter);
     }
     private Mesh GenerateHexagonMesh()
     {
@@ -95,27 +94,26 @@ public class SystemSectors : MonoBehaviour
     {
         float x = hexagonRadius * 1.5f * axialCoords.x;
         float z = hexagonRadius * Mathf.Sqrt(3f) * (axialCoords.y + axialCoords.x * 0.5f);
-        return new Vector3(x, 0, z);
+        return new(x, 0, z);
     }
     private void CalculateNeighbors()
     {
         // These are the axial coordinate offsets for neighbors in a hexagonal grid
         Vector2Int[] neighborOffsets = new Vector2Int[]
         {
-        new Vector2Int(1, 0),  // Right
-        new Vector2Int(0, 1),  // Top-right
-        new Vector2Int(-1, 1), // Top-left
-        new Vector2Int(-1, 0), // Left
-        new Vector2Int(0, -1), // Bottom-left
-        new Vector2Int(1, -1)  // Bottom-right
+        new(1, 0),  // Right
+        new(0, 1),  // Top-right
+        new(-1, 1), // Top-left
+        new(-1, 0), // Left
+        new(0, -1), // Bottom-left
+        new(1, -1)  // Bottom-right
         };
         foreach (var hexagon in hexagonDictionary)
         {
             Vector2Int gridPosition = hexagon.Key;
             GameObject hexagonObject = hexagon.Value;
 
-            List<GameObject> neighbors = new List<GameObject>();
-
+            List<GameObject> neighbors = new();
             foreach (var offset in neighborOffsets)
             {
                 Vector2Int neighborPosition = gridPosition + offset;

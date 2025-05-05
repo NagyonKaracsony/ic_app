@@ -1,4 +1,3 @@
-using Assets;
 using Ship;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,6 +78,8 @@ public class ShipHandler : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
+            position.x += Random.Range(-i, i);
+            position.z += Random.Range(-i, i);
             GameObject ship = CreateShipInstance(position, civilizationID);
             Battleship shipComponent = ship.AddComponent<Battleship>();
             SphereCollider colliderComponent = ship.AddComponent<SphereCollider>();
