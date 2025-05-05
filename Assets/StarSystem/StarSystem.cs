@@ -25,9 +25,35 @@ public class StarSystem : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         gameObject.GetComponent<NavMeshSurface>().BuildNavMesh();
+        byte spawnCount = 0;
+        byte maxSpawnCount = 80;
+        byte totalSpawnCount = 0;
+        for (byte i = 0; i < 150; i++)
+        {
+            spawnCount = (byte)Random.Range(3, 6);
+            Vector3 point = Vector3.zero;
+            if (CheckSpawn(transform.position, 200, out point))
+            {
+                ShipHandler.SpawnShip(point, 0, spawnCount);
+                totalSpawnCount += spawnCount;
+                if (totalSpawnCount >= maxSpawnCount) break;
+            }
+        }
+    }
 
-        ShipHandler.SpawnShip(new Vector3(10, 0, 20), 0, 5);
-        ShipHandler.SpawnShip(new Vector3(10, 0, 30), 1, 5);
-        ShipHandler.SetShipTarget(new Vector3(20, 0, 20));
+    bool CheckSpawn(Vector3 center, float range, out Vector3 result)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 randomPoint = center + Random.insideUnitSphere * range;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
+        }
+        result = Vector3.zero;
+        return false;
     }
 }
