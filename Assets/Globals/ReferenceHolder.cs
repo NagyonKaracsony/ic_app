@@ -10,7 +10,12 @@ public class ReferenceHolder : MonoBehaviour
     public GameObject StarPrefab;
     public GameObject PauseMenu;
     public GameObject UIPrefab;
+    public GameObject WorldSpaceCanvas;
     public GameObject CanvasTopSide;
+
+    public GameObject NamePlate;
+    public GameObject HealthPlate;
+    public GameObject StatuePlate;
 
     public GameObject ShipUI;
     public GameObject PlanetUI;
@@ -74,6 +79,11 @@ public class ReferenceHolder : MonoBehaviour
                     CanvasTopSide.gameObject.transform.GetChild(6).gameObject,
             };
         }
+    }
+    private void Start()
+    {
+        SettingsHandler.LoadSettings();
+        SettingsHandler.SyncSettings();
     }
     private void OnDestroy()
     {

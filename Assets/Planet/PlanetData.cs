@@ -15,6 +15,8 @@ public class PlanetData
         deMaterializedColorSettings.planetMaterial = null;
         colorSettings = JsonUtility.ToJson(deMaterializedColorSettings, false);
         planet.colorSettings.planetMaterial = planetMaterial;
+        Debug.Log(planet.planetProperties);
+        Debug.Log(JsonUtility.ToJson(planet.planetProperties, false));
         planetProperties = JsonUtility.ToJson(planet.planetProperties, false);
     }
 }

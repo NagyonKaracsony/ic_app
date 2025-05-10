@@ -160,7 +160,11 @@ MonoBehaviour:
   PauseMenu: {fileID: 0}
   UIPrefab: {fileID: 3651744965631113633, guid: 716142bd67614a14fa07117aab2f606a,
     type: 3}
+  WorldSpaceCanvas: {fileID: 0}
   CanvasTopSide: {fileID: 0}
+  NamePlate: {fileID: 0}
+  HealthPlate: {fileID: 0}
+  StatuePlate: {fileID: 0}
   ShipUI: {fileID: 0}
   PlanetUI: {fileID: 0}
   StationUI: {fileID: 0}
@@ -1159,10 +1163,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986650616}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetEffectsVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &355715600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,10 +2430,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1986650616}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1058170537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2722,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1986650616}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: SaveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SaveSettings
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1226938041
@@ -4502,6 +4542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicTracks: []
+  MusicPlayer: {fileID: 0}
+  EffectPlayer: {fileID: 0}
   HoverSound0: {fileID: 0}
   ClickSound0: {fileID: 0}
 --- !u!4 &1986650617

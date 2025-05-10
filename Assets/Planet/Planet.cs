@@ -7,14 +7,14 @@ using UnityEngine;
 public class Planet : MonoBehaviour
 {
     [Range(2, 256)]
-    public int resolution = 16;
+    public int resolution = 32;
     public bool autoUpdate = true;
     public enum FaceRenderMask { All, Top, Bottom, Left, Right, Front, Back };
     public FaceRenderMask faceRenderMask;
 
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
-    public PlanetProperties planetProperties;
+    public PlanetProperties planetProperties = new();
 
     [HideInInspector]
     public bool shapeSettingsFoldout;

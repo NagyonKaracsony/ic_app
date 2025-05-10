@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 public class SystemSectors : MonoBehaviour
@@ -42,15 +43,21 @@ public class SystemSectors : MonoBehaviour
 
         if (Random.Range(1, 15) <= 1)
         {
-            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet - {axialCoords.x}, {axialCoords.y}");
+            string name = NameGenerators.PlanetNameGenerator.GenerateUniqueName();
+            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), name);
+            planet.transform.parent = sector.transform;
             planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
             GameManager.planets.Add(planet);
+
+            GameObject namePlate = Instantiate(ReferenceHolder.Instance.NamePlate, planet.transform);
+            namePlate.transform.SetParent(ReferenceHolder.Instance.WorldSpaceCanvas.transform);
+            namePlate.GetComponent<TextMeshProUGUI>().text = name;
 
             NavMeshObstacle navMeshObstacleComponent = planet.AddComponent<NavMeshObstacle>();
             navMeshObstacleComponent.shape = NavMeshObstacleShape.Capsule;
             navMeshObstacleComponent.carving = true;
             navMeshObstacleComponent.carveOnlyStationary = true;
-            navMeshObstacleComponent.radius = 0.5f;
+            navMeshObstacleComponent.radius = 0.4f;
         }
 
         meshFilter.mesh = GenerateHexagonMesh();

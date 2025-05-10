@@ -1,21 +1,31 @@
+using Assets.Globals;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class SettingsHandler : MonoBehaviour
+public class SettingsHandler
 {
-    private void Awake()
+    public static Settings settings = new();
+    public static void SyncSettings()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        AudioManager.SetMusicVolume(settings.MusicVolume);
+        AudioManager.SetEffectsVolume(settings.EffectsVolume);
     }
-    void Start()
+    public static void SaveSettings()
     {
-
+        JObject settingsObject = JObject.FromObject(settings);
+        System.IO.File.WriteAllText(GlobalUtility.GameFolder + "/Settings.json", settingsObject.ToString());
     }
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public static void LoadSettings()
     {
-
+        Debug.Log("Settings loaded");
+        JObject settingsObject = JObject.Parse(System.IO.File.ReadAllText(GlobalUtility.GameFolder + "/Settings.json"));
+        settings = settingsObject.ToObject<Settings>();
+        Debug.Log("Settings loaded");
+        Debug.Log(settings.MusicVolume);
+        Debug.Log(settings);
     }
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+}
+public class Settings
+{
+    public float MusicVolume;
+    public float EffectsVolume;
 }

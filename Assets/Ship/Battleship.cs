@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [Serializable]
 public class Battleship : MonoBehaviour, IShip, IBattleship
 {
-    [SerializeField] private new string name = "Battleship";
+    [SerializeField] private new string name = NameGenerators.ShipNameGenerator.GenerateUniqueName();
     [SerializeField] private ShipType type;
     [SerializeField] private int hullHealthPoints = 5000;
     [SerializeField] private int shieldHealthPoints = 2000;

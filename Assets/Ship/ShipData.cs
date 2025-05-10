@@ -35,8 +35,13 @@ namespace Ship
             Range = ship.Range;
             Speed = ship.Speed;
             currentPosition = SerializableVector3Row.Vector3NullableToArray(ship.transform.position);
-            currentDestination = SerializableVector3Row.Vector3NullableToArray(ship.DestinationQueue.First());
-            destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(ship.DestinationQueue);
+
+            if (ship.DestinationQueue.Count == 0) currentDestination = null;
+            else currentDestination = SerializableVector3Row.Vector3NullableToArray(ship.DestinationQueue.First());
+
+            if (ship.DestinationQueue.Count == 0) destinationMatrix = null;
+            else destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(ship.DestinationQueue);
+
             ownerID = ship.ownerID;
             DestinationMatrixWrapper wrapper = new() { destinationMatrix = VectorQueueConverter.QueueToSerializableMatrix(ship.DestinationQueue) };
         }

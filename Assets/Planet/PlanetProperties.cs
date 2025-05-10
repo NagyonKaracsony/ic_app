@@ -11,19 +11,23 @@
     /// <summary>Holds information on the properties of the planet.</summary>
     public class PlanetProperties
     {
-        public SizeCategoryUnit SizeCategory { get; set; }
-        public GravityCategoryUnit GravityCategory { get; set; }
-        public TemperatureCategoryUnit TemperatureCategory { get; set; }
-        public PressureCategoryUnit PressureCategory { get; set; }
+        public SizeCategoryUnit SizeCategory;
+        public GravityCategoryUnit GravityCategory;
+        public TemperatureCategoryUnit TemperatureCategory;
+        public PressureCategoryUnit PressureCategory;
         /// <summary> The Mass of the planet, in kilograms.</summary>
-        public double Mass { get; set; }
+        public double Mass;
         /// <summary> The radius of the planet, in kilometers.</summary>
-        public double Radius { get; set; }
+        public double Radius;
         /// <summary> The surface gravity of the planet, in m/s².</summary>
-        public double SurfaceGravity { get; set; }
+        public double SurfaceGravity;
         /// <summary> The surface gravity of the planet, in kelvin degrees.</summary>
-        public double Temperature { get; set; }
+        public double Temperature;
         /// <summary> The atmospheric Pressure of the planet, in atmospheres. </summary>
-        public double AtmosphericPressure { get; set; }
+        public double AtmosphericPressure;
+        public PlanetProperties()
+        {
+
+        }
     }
 }
