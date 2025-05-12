@@ -4,9 +4,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public static Civilization playerCivilization;
     public static List<GameObject> UIPanels = new();
-    public static List<GameObject> planets = new();
+    public static List<GameObject> Planets = new();
+    public static List<GameObject> Sectors = new();
+    public static List<Civilization> Civilizations = new();
     public static GameManager Instance
     {
         get
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null) _instance = this;
         else if (_instance != this) Destroy(gameObject);
         UIPanels.Add(GameObject.Find("EventUI"));
-        playerCivilization = new Civilization();
+        Civilizations.Add(new Civilization("Player"));
+        Civilizations.Add(new Civilization("Enemy"));
     }
 }

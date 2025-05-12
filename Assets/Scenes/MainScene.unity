@@ -8513,6 +8513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 963194227}
   SystemCamera: {fileID: 1790412744}
+  positionThreshold: 0.01
+  rotationThreshold: 0.1
 --- !u!114 &1537526472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9416,6 +9418,10 @@ MonoBehaviour:
   starMaterial: {fileID: -876546973899608171, guid: 3c85e4c47a9c0524ab53c808277f056e,
     type: 3}
   sectorMaterial: {fileID: -876546973899608171, guid: b94705dc302489541b51970c171ecccd,
+    type: 3}
+  friendlySectorMaterial: {fileID: -876546973899608171, guid: 06b0cac5a33536943a659cca4747d9a9,
+    type: 3}
+  hostileSectorMaterial: {fileID: -876546973899608171, guid: bb1dc71f7b9420541bbf8bf99d0dd107,
     type: 3}
   atmosphereMaterial: {fileID: -876546973899608171, guid: 4d4253c80f10cb146bc33b2ac679c8d9,
     type: 3}

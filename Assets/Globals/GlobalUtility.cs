@@ -18,7 +18,7 @@ namespace Assets.Globals
         {
             if (!Directory.Exists(SaveFolder)) Directory.CreateDirectory(SaveFolder);
 
-            List<GameObject> planets = GameManager.planets;
+            List<GameObject> planets = GameManager.Planets;
             List<Battleship> ships = ShipHandler.battleships;
 
             PlanetData[] savedPlanets = new PlanetData[planets.Count];

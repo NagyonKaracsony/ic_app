@@ -9,7 +9,7 @@ public class MainMenuScript : MonoBehaviour
     private readonly float[] orbitSpeeds = new float[3]; // planet orbit speeds
     private readonly float[] orbitRadii = new float[3]; // planet orbit radiuses
     private float[] orbitAngles = new float[3]; // current angle of the planet in its orbit
-    private readonly float[] yOffsets = new float[3]; // vertical offsets of the planets
+    private readonly float[] yOffsets = new float[3]; // vertical offsets of the Planets
     private readonly float[] eccentricities = new float[3]; // Eccentricity factors for the planet orbits 
     private readonly float[] orbitPhases = new float[3]; // Phase offsets for the planet orbits
 
@@ -37,14 +37,14 @@ public class MainMenuScript : MonoBehaviour
         // create the planet game objects 
         for (int i = 0; i < planets.Length; i++) planets[i] = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), $"planet");
 
-        // set up the planets with absolute properties
+        // set up the Planets with absolute properties
         PlanetData[] planetData = new PlanetData[] {
             new PlanetData { orbitRadius = 10, orbitSpeed = 20, radius = 1, resolution = 256 },
             new PlanetData { orbitRadius = 16, orbitSpeed = 20, radius = 1, resolution = 256 },
             new PlanetData { orbitRadius = 22, orbitSpeed = 20, radius = 1, resolution = 64 }
         };
 
-        // set up the planets with randomized properties
+        // set up the Planets with randomized properties
         for (int i = 0; i < planets.Length && i < planetData.Length; i++)
         {
             orbitSpeeds[i] = planetData[i].orbitSpeed;

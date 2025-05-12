@@ -16,6 +16,13 @@ public class SystemSectors : MonoBehaviour
         GenerateSystemSectors();
         CalculateNeighbors();
     }
+    public void LoadExisting(Material sectorMaterial, int size)
+    {
+        hexagonMaterial = sectorMaterial;
+        hexagonGridRadius = size;
+        GenerateSystemSectors();
+        CalculateNeighbors();
+    }
     private void GenerateSystemSectors()
     {
         for (int q = -hexagonGridRadius; q <= hexagonGridRadius; q++)
@@ -25,11 +32,49 @@ public class SystemSectors : MonoBehaviour
             for (int r = r1; r <= r2; r++)
             {
                 Vector2Int axialCoords = new Vector2Int(q, r);
-                CreateSector(AxialToWorld(axialCoords), axialCoords);
+                CreateNewSector(AxialToWorld(axialCoords), axialCoords);
             }
         }
     }
-    private void CreateSector(Vector3 position, Vector2Int axialCoords)
+    private void CreateNewSector(Vector3 position, Vector2Int axialCoords)
+    {
+        GameObject sector = new($"Sector ({axialCoords.x}, {axialCoords.y})");
+        sector.layer = 10;
+        sector.transform.position = position;
+        sector.transform.parent = transform;
+
+        Sector SectorComponent = sector.AddComponent<Sector>();
+        MeshFilter meshFilter = sector.AddComponent<MeshFilter>();
+        MeshRenderer meshRenderer = sector.AddComponent<MeshRenderer>();
+        MeshCollider meshCollider = sector.AddComponent<MeshCollider>();
+        sector.transform.Rotate(new Vector3(180, 0, 0));
+
+        if (Random.Range(1, 15) <= 1)
+        {
+            string name = NameGenerators.PlanetNameGenerator.GenerateUniqueName();
+            GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), name);
+            planet.transform.parent = sector.transform;
+            planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
+            GameManager.Planets.Add(planet);
+
+            GameObject namePlate = Instantiate(ReferenceHolder.Instance.NamePlate, planet.transform);
+            namePlate.transform.SetParent(ReferenceHolder.Instance.WorldSpaceCanvas.transform);
+            namePlate.GetComponent<TextMeshProUGUI>().text = name;
+
+            NavMeshObstacle navMeshObstacleComponent = planet.AddComponent<NavMeshObstacle>();
+            navMeshObstacleComponent.shape = NavMeshObstacleShape.Capsule;
+            navMeshObstacleComponent.carving = true;
+            navMeshObstacleComponent.carveOnlyStationary = true;
+            navMeshObstacleComponent.radius = 0.4f;
+        }
+
+        meshFilter.mesh = GenerateHexagonMesh();
+        meshRenderer.material = hexagonMaterial;
+        meshCollider.sharedMesh = meshFilter.mesh;
+
+        hexagonDictionary.Add(axialCoords, sector);
+    }
+    private void CreateExistingSector(Vector3 position, Vector2Int axialCoords)
     {
         GameObject sector = new($"Sector ({axialCoords.x}, {axialCoords.y})");
         sector.layer = 10;
@@ -47,7 +92,7 @@ public class SystemSectors : MonoBehaviour
             GameObject planet = Planet.LoadFrom(Path.Combine(Application.streamingAssetsPath, "Planets\\GenerationTemplate.json"), name);
             planet.transform.parent = sector.transform;
             planet.transform.position = (Random.Range(0, 2) <= 0) ? position + ChoseOffset() : position;
-            GameManager.planets.Add(planet);
+            GameManager.Planets.Add(planet);
 
             GameObject namePlate = Instantiate(ReferenceHolder.Instance.NamePlate, planet.transform);
             namePlate.transform.SetParent(ReferenceHolder.Instance.WorldSpaceCanvas.transform);

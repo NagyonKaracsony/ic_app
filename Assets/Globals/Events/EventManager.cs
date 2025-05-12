@@ -6,10 +6,7 @@ public class EventManager : MonoBehaviour
     public GameEvent currentEvent;
     public void TriggerEvent(string eventId)
     {
-        if (!EventDatabase.Events.TryGetValue(eventId, out currentEvent))
-        {
-            return;
-        }
+        if (!EventDatabase.Events.TryGetValue(eventId, out currentEvent)) return;
         ShowEventUI(currentEvent);
     }
     public void ChooseOption(EventOption option)
@@ -20,7 +17,7 @@ public class EventManager : MonoBehaviour
     }
     private void ApplyEffects(List<Effect> effects)
     {
-        Civilization civilization = GameManager.playerCivilization;
+        Civilization civilization = GameManager.Civilizations[0];
         foreach (var effect in effects)
         {
             switch (effect.type)

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-// This class is responsible for generating unique names for planets.
+// This class is responsible for generating unique names for Planets.
 // It uses a combination of prefixes and suffixes to create names.
 public static class NameGenerators
 {

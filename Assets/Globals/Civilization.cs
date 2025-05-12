@@ -45,9 +45,9 @@ namespace Assets
         // Custom values (for scripting & event flexibility)
         public Dictionary<string, int> customVariables = new();
 
-        public Civilization()
+        public Civilization(string name)
         {
-            empireName = "Terran Federation";
+            empireName = name;
             governmentType = "Democracy";
             speciesName = "Humanity";
             Energy = 2000;

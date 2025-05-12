@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
+    public static bool isStartingNewGame = false;
     public Animator transition;
     public void StartNewGame()
     {
+        isStartingNewGame = true;
         StartCoroutine(LoadSceneAsynchronously(1));
     }
     public void BackToMainMenu()

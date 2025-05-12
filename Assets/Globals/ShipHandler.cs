@@ -52,6 +52,7 @@ public class ShipHandler : MonoBehaviour
                     }
                     battleship.SetTarget(closestTarget);
                 }
+                battleship.ContributeToCapture();
             }
         }
     }

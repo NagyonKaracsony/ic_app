@@ -1,6 +1,5 @@
 using Assets.Globals;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 public class SettingsHandler
 {
     public static Settings settings = new();
@@ -16,12 +15,8 @@ public class SettingsHandler
     }
     public static void LoadSettings()
     {
-        Debug.Log("Settings loaded");
         JObject settingsObject = JObject.Parse(System.IO.File.ReadAllText(GlobalUtility.GameFolder + "/Settings.json"));
         settings = settingsObject.ToObject<Settings>();
-        Debug.Log("Settings loaded");
-        Debug.Log(settings.MusicVolume);
-        Debug.Log(settings);
     }
 }
 public class Settings

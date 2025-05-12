@@ -1,4 +1,3 @@
-using Assets;
 using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -10,10 +9,18 @@ public class StarSystem : MonoBehaviour
     {
         SystemSectors = new("SystemSectors");
         SystemSectors SystemSectorsComponent = SystemSectors.AddComponent<SystemSectors>();
-        SystemSectorsComponent.CreateNew(new Material(ReferenceHolder.Instance.sectorMaterial), 8);
-
-        Instantiate(ReferenceHolder.Instance.StarPrefab, transform.transform);
-        StartCoroutine(CreateNavMesh());
+        if (!LevelLoader.isStartingNewGame)
+        {
+            SystemSectorsComponent.CreateNew(new Material(ReferenceHolder.Instance.sectorMaterial), 8);
+            Instantiate(ReferenceHolder.Instance.StarPrefab, transform.transform);
+            StartCoroutine(CreateNavMesh());
+        }
+        else
+        {
+            SystemSectorsComponent.LoadExisting(new Material(ReferenceHolder.Instance.sectorMaterial), 8);
+            Instantiate(ReferenceHolder.Instance.StarPrefab, transform.transform);
+            StartCoroutine(CreateNavMesh());
+        }
     }
     public IEnumerator CreateNavMesh()
     {
@@ -34,7 +41,7 @@ public class StarSystem : MonoBehaviour
             Vector3 point = Vector3.zero;
             if (CheckSpawn(transform.position, 200, out point))
             {
-                ShipHandler.SpawnShip(point, 0, spawnCount);
+                ShipHandler.SpawnShip(point, 1, spawnCount);
                 totalSpawnCount += spawnCount;
                 if (totalSpawnCount >= maxSpawnCount) break;
             }

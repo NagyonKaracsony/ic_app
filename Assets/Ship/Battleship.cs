@@ -138,6 +138,30 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
             else Target.HullHealthPoints -= DamageToDeal;
         }
     }
+    public void ContributeToCapture()
+    {
+        if (ColliderHits != 0)
+        {
+            List<Sector> NerbySectors = new();
+            for (int y = 0; y < colliderHits; y++)  if (Colliders[y].gameObject.layer == 10) NerbySectors.Add(Colliders[y].gameObject.GetComponent<Sector>());
+
+            Sector closestSector = null;
+            float closestSqrDistance = float.MaxValue;
+            for (int y = 0; y < NerbySectors.Count; y++)
+            {
+                float sqrDist = (NerbySectors[y].transform.position - transform.position).sqrMagnitude;
+                if (sqrDist < closestSqrDistance)
+                {
+                    closestSector = NerbySectors[y];
+                    closestSqrDistance = sqrDist;
+                }
+            }
+            if (closestSector != null)
+            {
+                if (closestSector.OwnerID != ownerId) closestSector.IncreaseCaptureStatus(ownerId, 1f);
+            }
+        }
+    }
     public void LoseTarget()
     {
         Target = null;
@@ -175,6 +199,7 @@ public class Battleship : MonoBehaviour, IShip, IBattleship
         float distance = Vector3.Distance(transform.position, destination);
         currentDestination = destination;
     }
+    // obsolete
     public void RemoveLastQueuedDestination()
     {
         // removes the last destination<vector3> from the queue

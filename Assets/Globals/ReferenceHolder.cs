@@ -29,6 +29,8 @@ public class ReferenceHolder : MonoBehaviour
     public Material planetMaterial;
     public Material starMaterial;
     public Material sectorMaterial;
+    public Material friendlySectorMaterial;
+    public Material hostileSectorMaterial;
     public Material atmosphereMaterial;
     public Material shipMaterial;
     public ReferenceHolder()
